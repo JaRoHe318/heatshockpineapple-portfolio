@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found" description="404 Error">
+  <section class="error-container">
+    
+    <img 
+      src="/android-chrome-512x512.png" 
+      alt="Chill Pineapple" 
+      class="error-mascot" 
+    />
+
+    <div class="denature-effect">
+      <h1>404</h1>
+      <div class="denature-sub">Signal Lost</div>
+    </div>
+    
+    <p class="error-text">
+      The page you are looking for has denatured. <br />
+      The link may be broken, or the content has unfolded into nonsense.
+    </p>
+    
+    <a href="/" class="back-link">Refold (Return Home)</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-container {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 2rem;
+  }
+
+  /* NEW: Mascot Styling */
+  .error-mascot {
+    width: 180px; /* Big enough to be seen, small enough to not dominate */
+    height: auto;
+    margin-bottom: 2rem;
+    /* A slow, chill float animation */
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+  }
+
+  /* The Heat Shock Animation (Existing) */
+  .denature-effect h1 {
+    font-size: 6rem;
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    margin: 0;
+    line-height: 1;
+    position: relative;
+    
+    /* The animation: Blur and expand spacing */
+    animation: heatshock 3s infinite alternate ease-in-out;
+  }
+
+  .denature-sub {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+  }
+
+  .error-text {
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    color: var(--text-body);
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+  }
+
+  .back-link:hover {
+    border-color: var(--accent-primary);
+    background: var(--bg-surface);
+    color: var(--accent-primary);
+  }
+
+  @keyframes heatshock {
+    0% {
+      filter: blur(0px);
+      letter-spacing: -0.05em;
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      filter: blur(4px);
+      letter-spacing: 0.15em;
+      transform: scale(1.05);
+      opacity: 0.6;
+    }
+  }
+
+  /* NEW: The Floating Animation */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+</style>

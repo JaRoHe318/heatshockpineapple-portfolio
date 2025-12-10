@@ -1,0 +1,237 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // remove the first "/"
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    
+    <a href="/" class="site-title">
+      <img src="/android-chrome-192x192.png" alt="Heat Shock Pineapple Logo" class="header-logo" />
+      <span class="brand-text">Heat Shock Pineapple</span>
+    </a>
+
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav id="site-nav" class="site-nav">
+      <a href="/" class={currentPath === "" ? "active" : ""}>Home</a>
+      <a href="/science" class={currentPath.startsWith("science") ? "active" : ""}>Science</a>
+      <a href="/code" class={currentPath.startsWith("code") ? "active" : ""}>Code</a>
+      <a href="/resources" class={currentPath.startsWith("resources") ? "active" : ""}>Resources</a>
+      <a href="/about" class={currentPath.startsWith("about") ? "active" : ""}>About</a>
+      
+      <div class="mobile-theme-wrapper">
+        <button class="theme-toggle" aria-label="Toggle Dark Mode">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+    
+  </div>
+</header>
+
+<script>
+  // Mobile Menu Logic
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('site-nav');
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', () => {
+      // Toggle the 'open' class on both the button and the nav
+      menuToggle.classList.toggle('open');
+      nav.classList.toggle('open');
+    });
+  }
+</script>
+
+<style>
+  /* ========================================= */
+  /* BASE STYLES (Applies to all screens)      */
+  /* ========================================= */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.8rem 0;
+    background: rgba(253, 251, 247, 0.9); /* Light Mode Bg */
+    backdrop-filter: blur(12px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Dark Mode Header Bg */
+  :global([data-theme="dark"]) .site-header {
+    background: rgba(26, 25, 24, 0.9);
+  }
+
+  .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Important for absolute mobile menu */
+  }
+
+  /* Branding */
+  .site-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    text-decoration: none;
+    z-index: 1002; /* Stay on top of mobile menu */
+  }
+
+  .header-logo {
+    height: 32px;
+    width: auto;
+    border-radius: 4px;
+  }
+
+  /* ========================================= */
+  /* DESKTOP NAV (Width > 768px)               */
+  /* ========================================= */
+  .site-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .site-nav a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .site-nav a:hover, .site-nav a.active {
+    color: var(--text-main);
+  }
+
+  /* Hamburger is hidden on desktop */
+  .menu-toggle {
+    display: none; 
+  }
+
+  .mobile-theme-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  /* ========================================= */
+  /* MOBILE NAV (Width <= 768px)               */
+  /* ========================================= */
+  @media (max-width: 768px) {
+    
+    /* 1. Show the Hamburger Button */
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1002; /* Above the menu drawer */
+      padding: 0;
+    }
+
+    .bar {
+      width: 100%;
+      height: 3px;
+      background-color: var(--text-main);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    /* 2. Hide the Menu by default */
+    .site-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh; /* Full Screen Drawer */
+      background-color: var(--bg-paper);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      
+      /* Hide it initially */
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1001; /* Below logo/button, above page content */
+    }
+
+    /* 3. "Open" State */
+    .site-nav.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* Bigger Links for Fingers */
+    .site-nav a {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    /* Hamburger Animation to "X" */
+    .menu-toggle.open .bar:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .menu-toggle.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.open .bar:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+  }
+
+  /* Theme Toggle Styling */
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .theme-toggle:hover { color: var(--text-main); }
+  
+  /* Hide Moon by default */
+  .moon-icon { display: none; }
+  
+  /* When dark mode is active (global attr), show moon, hide sun */
+  :global([data-theme="dark"]) .sun-icon { display: none; }
+  :global([data-theme="dark"]) .moon-icon { display: block; }
+
+</style>

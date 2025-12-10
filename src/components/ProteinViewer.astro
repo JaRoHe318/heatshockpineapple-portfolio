@@ -1,0 +1,75 @@
+<div id="viewport" class="protein-container"></div>
+<div class="protein-caption mono-meta">
+  Structure: Hsp70 (PDB: 5NRO) · <span id="loading-text">Loading crystal structure...</span>
+</div>
+
+<script>
+  import * as NGL from 'ngl';
+
+  // 1. Setup the Stage
+  const stage = new NGL.Stage("viewport", {
+    backgroundColor: "white", 
+    tooltip: false
+    // Removed hardcoded fog parameters to prevent the "disappearing" issue
+  });
+
+  // 2. Handle Resizing
+  window.addEventListener("resize", function () {
+    stage.handleResize();
+  });
+
+  // 3. Load the Hsp70 Structure
+  stage.loadFile("rcsb://5NRO").then(function (component: any) {
+    
+    const loading = document.getElementById('loading-text');
+    if (loading) loading.innerText = "Interactive 3D View";
+
+    if (component) {
+      // 4. "Designer" Representation
+      component.addRepresentation("cartoon", {
+        color: "#2d5a45",  // Forest Green
+        aspectRatio: 3.0,
+        opacity: 0.9,
+        roughness: 1.0
+      });
+
+      component.addRepresentation("ball+stick", {
+        sele: "ligand",
+        color: "#c4835f", // Terracotta
+        scale: 2.0
+      });
+
+      // 5. Center and Zoom
+      component.autoView();
+
+      // 6. Safe Animation (Built-in Spin)
+      // This is the fix: instead of a manual math loop, we use NGL's built-in spin
+      stage.setSpin(true);
+    }
+  });
+</script>
+
+<style>
+  .protein-container {
+    width: 100%;
+    height: 400px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+    cursor: grab;
+    transition: border-color 0.3s ease;
+  }
+
+  .protein-container:active {
+    cursor: grabbing;
+    border-color: var(--accent-primary);
+  }
+
+  .protein-caption {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+  }
+</style>

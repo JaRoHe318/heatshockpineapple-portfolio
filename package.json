@@ -1,0 +1,23 @@
+{
+  "name": "heat-shock-pineapple",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "photos": "node generate-photos.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.0.0",
+    "exif-parser": "^0.1.12",
+    "ngl": "^2.4.0",
+    "plotly.js-dist-min": "^3.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.3.0",
+    "typescript": "^5.3.0"
+  }
+}

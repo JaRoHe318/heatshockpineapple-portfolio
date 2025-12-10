@@ -1,0 +1,37 @@
+---
+interface Props {
+  label?: string; // Pre-title context
+  title: string;
+  description: string;
+  skills?: string[]; // Array of tech/tools
+  meta?: string;     // Publication or Status
+  href?: string;
+}
+
+const { label, title, description, skills, meta, href } = Astro.props;
+---
+
+<article class="card">
+  {label && <span class="mono-meta">{label}</span>}
+  
+  <h3>
+    {href ? <a href={href} class="card-link">{title}</a> : title}
+  </h3>
+  
+  <p>{description}</p>
+  
+  {/* The "Coder" footprint: Monospace tags */}
+  {skills && (
+    <div class="card-tags">
+      {skills.map(skill => (
+        <span class="tag">{skill}</span>
+      ))}
+    </div>
+  )}
+
+  {meta && (
+    <div style="margin-top: auto; padding-top: 1rem;">
+      <span class="mono-meta" style="font-size: 0.75rem;">{meta}</span>
+    </div>
+  )}
+</article>

@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BindingCurve from '../components/BindingCurve.astro';
+---
+
+<BaseLayout 
+  title="Code & Notebooks"
+  description="Analysis workflows for exploring data, fitting models, and quality control.">
+  
+  <section class="page-header">
+    <h1>Code & Notebooks</h1>
+    <p class="mono-meta">Python · R · Reproducibility</p>
+  </section>
+
+  <p style="margin-bottom: 2rem;">
+    The chart below is rendered live, representing the kind of data visualization tools I build for assay analysis.
+  </p>
+
+  <BindingCurve />
+
+  <div class="ledger-container">
+    <h3 class="ledger-title">Key Workflows</h3>
+
+    <div class="ledger-entry">
+      <div class="entry-meta mono-meta">Jupyter · Python</div>
+      <div class="entry-content">
+        <h4>Binding curve analysis</h4>
+        <p>The logic behind the chart above. Import tabular data, clean outliers, fit dose–response curves, and validate assumptions.</p>
+        <a href="https://github.com/jarohe318" class="code-link">View Repo →</a>
+        <div class="entry-tags">
+          <span class="tag">scipy</span>
+          <span class="tag">pandas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-entry">
+      <div class="entry-meta mono-meta">R Markdown</div>
+      <div class="entry-content">
+        <h4>Screening QC and diagnostics</h4>
+        <p>Automated quality control for 384-well screens. Computes plate statistics (Z-prime), flags suspect wells, and generates heatmaps for batch processing.</p>
+        <a href="https://github.com/jarohe318" class="code-link">View Repo →</a>
+        <div class="entry-tags">
+          <span class="tag">ggplot2</span>
+          <span class="tag">tidyr</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-entry">
+      <div class="entry-meta mono-meta">Pipeline</div>
+      <div class="entry-content">
+        <h4>Structural Visualization</h4>
+        <p>Scripts for rendering publication-quality protein figures and SAR analysis, integrating chemical structures with activity data.</p>
+        <a href="https://github.com/jarohe318" class="code-link">View Repo →</a>
+        <div class="entry-tags">
+          <span class="tag">ChimeraX</span>
+          <span class="tag">RDKit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .ledger-container { margin-top: 4rem; max-width: 800px; }
+  .ledger-title { margin-bottom: 2rem; border-bottom: 2px solid var(--text-main); display: inline-block; }
+  .ledger-entry { display: grid; grid-template-columns: 150px 1fr; gap: 2rem; padding-bottom: 3rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border); }
+  .entry-meta { color: var(--accent-primary); text-align: right; padding-top: 0.2rem; }
+  .entry-content h4 { font-size: 1.25rem; font-family: var(--font-serif); margin-bottom: 0.75rem; color: var(--text-main); }
+  .code-link { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-primary); margin-top: 0.5rem; display: inline-block; }
+  .entry-tags { margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  
+  @media (max-width: 600px) {
+    .ledger-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+    .entry-meta { text-align: left; }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Resources"
+  description="Curated tools, libraries, and readings for computational biology.">
+  
+  <section class="page-header">
+    <h1>Resources</h1>
+    <p class="mono-meta">Learning · Tools · Reference</p>
+  </section>
+
+  <div class="resources-grid">
+    
+    <div class="resource-col">
+      <h3>For Biochemists</h3>
+      <ul class="resource-list">
+        <li><a href="https://www.rcsb.org/">PDB (Protein Data Bank)</a> <span class="desc">The source of truth for structures.</span></li>
+        <li><a href="https://web.expasy.org/protparam/">ProtParam</a> <span class="desc">Quick physical/chemical parameters.</span></li>
+        <li><a href="https://benchling.com">Benchling</a> <span class="desc">Modern lab notebook & sequence design.</span></li>
+      </ul>
+    </div>
+
+    <div class="resource-col">
+      <h3>For Python/Data</h3>
+      <ul class="resource-list">
+        <li><a href="https://pandas.pydata.org/docs/">Pandas Documentation</a> <span class="desc">Read the docs, seriously.</span></li>
+        <li><a href="https://biopython.org/">Biopython</a> <span class="desc">Essential tools for biological computation.</span></li>
+        <li><a href="https://r4ds.had.co.nz/">R for Data Science</a> <span class="desc">The best book for learning R/Tidyverse.</span></li>
+      </ul>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .resources-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+  
+  .resource-col h3 {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .resource-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .resource-list li {
+    margin-bottom: 1.5rem;
+  }
+
+  .resource-list a {
+    font-weight: 600;
+    color: var(--accent-primary);
+    display: block;
+    border: none;
+  }
+
+  .desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .resources-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>

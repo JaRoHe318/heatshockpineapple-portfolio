@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="About"
+  description="Who I am, how I work, and the kinds of problems I like to solve.">
+  
+  <section class="page-header">
+    <h1>About</h1>
+    <p class="mono-meta">Biochemist · Coder · Photographer</p>
+  </section>
+
+  <img 
+    src="/images/about-cover.jpg" 
+    alt="Jason Hernandez in the lab" 
+    class="section-cover" 
+  />
+
+  <section class="about-content">
+    <h3>Background</h3>
+    <p>
+      I am Jason Hernandez, a biochemist who lives at the edge between wet lab work and code. 
+      Most of my recent time has gone into protein assay development, high-throughput screening, and the work of making data clean enough to trust.
+    </p>
+    <p>
+      <strong>Heat Shock Pineapple</strong> is the umbrella I use for my work in science, computation, photography, and writing. 
+      The name is a nod to the heat shock proteins I studied at UCSF—molecular chaperones that keep other proteins from falling apart when conditions get rough.
+    </p>
+
+    <h3>How I work</h3>
+    <p>
+      I like building experiments starting from the analysis. 
+      First comes the question, then a definition of what good signal looks like. 
+      After that I design controls, plate maps, and QC metrics that make that signal obvious. 
+    </p>
+
+    <h3>Connect</h3>
+    <p>
+      If you are working on assay-heavy biology and want someone who can think in both pipettes and scripts, I am happy to talk.
+    </p>
+    <ul style="list-style: none; padding: 0; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+      <li><a href="/files/Jason_Hernandez_Resume.pdf">Resume (PDF)</a></li>
+      <li><a href="mailto:jason@heatshockpineapple.com">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/jrh318">LinkedIn</a></li>
+      <li><a href="https://github.com/jarohe318">GitHub</a></li>
+    </ul>
+  </section>
+</BaseLayout>

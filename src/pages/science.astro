@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProteinViewer from '../components/ProteinViewer.astro'; 
+---
+
+<BaseLayout 
+  title="Science"
+  description="Projects combining protein biochemistry, assay development, and computational analysis.">
+  
+  <section class="page-header">
+    <h1>Science</h1>
+    <p class="mono-meta">Assay Development · HTS · Protein Design</p>
+  </section>
+
+  <ProteinViewer />
+
+  <div class="ledger-container">
+    <h3 class="ledger-title">Research Projects</h3>
+    
+    <div class="ledger-entry">
+      <div class="entry-meta mono-meta">2025 · Structure</div>
+      <div class="entry-content">
+        <h4>Peptide–protein interaction optimization</h4>
+        <p>
+          Led computational–experimental optimization of protein-binding peptides. 
+          Achieved multi-fold affinity improvements (30 nM to 5 nM) using <strong>AlphaFold 3</strong> to guide design. 
+          Validated hits using site-directed mutagenesis and fluorescence assays.
+        </p>
+        <div class="entry-tags">
+          <span class="tag">AlphaFold 3</span>
+          <span class="tag">SAR</span>
+          <span class="tag">FP / MST</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-entry">
+      <div class="entry-meta mono-meta">Submitted · Manuscript</div>
+      <div class="entry-content">
+        <h4>Assay development for multi-protein systems</h4>
+        <p>
+          Managed an HTS campaign of 1,857 compounds targeting the HscA/HscB/IscU chaperone system.
+          Designed the 384-well protocol using <strong>BioTek EL406</strong> bulk dispensing automation.
+        </p>
+        <div class="entry-tags">
+          <span class="tag">384-well HTS</span>
+          <span class="tag">BioTek EL406</span>
+          <span class="tag">Python QC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-entry">
+      <div class="entry-meta mono-meta">2025 · Cell Chem Bio</div>
+      <div class="entry-content">
+        <h4>Validating computationally designed proteins</h4>
+        <p>
+          Characterized binding and stability of de novo designed protein mimics. 
+          Bridged structural predictions with experimental validation and documented protocols for reproducibility.
+        </p>
+        <div class="entry-tags">
+          <span class="tag">Biophysics</span>
+          <span class="tag">Design Validation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .ledger-container {
+    margin-top: 4rem;
+    max-width: 800px;
+  }
+  
+  .ledger-title {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--text-main);
+    display: inline-block;
+  }
+
+  .ledger-entry {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 2rem;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .entry-meta {
+    color: var(--accent-primary);
+    text-align: right;
+    padding-top: 0.2rem;
+  }
+
+  .entry-content h4 {
+    font-size: 1.25rem;
+    font-family: var(--font-serif);
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+  }
+
+  .entry-tags {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .ledger-entry {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    .entry-meta {
+      text-align: left;
+    }
+  }
+</style>

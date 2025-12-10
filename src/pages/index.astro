@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Heat Shock Pineapple"
+  description="Personal site for biochemistry, data analysis, and photography.">
+  
+  <section class="home-grid">
+    <div class="bio-col">
+      <img 
+        src="/images/portrait.jpg" 
+        alt="Jason Hernandez" 
+        class="home-portrait"
+        loading="eager" 
+      />
+      <h1 class="name-title">Jason Hernandez</h1>
+      <p class="role-list mono-meta">Biochemist · Data Scientist · Photographer</p>
+    </div>
+
+    <div class="intro-col">
+      <h2 class="headline">Experiments, code, and light.</h2>
+      <p class="body-text">
+        I design protein assays, analyze noisy data, and document the world through a lens. 
+        This site collects the work that happens when those three overlap.
+      </p>
+
+      <div class="quote-block">
+        <p>“Nearly everything is really interesting if you go into it deeply enough.”</p>
+        <cite>— Richard Feynman</cite>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Split layout */
+    gap: 4rem;
+    align-items: center;
+    min-height: 60vh;
+    margin-top: 2rem;
+  }
+
+  /* Left Column */
+  .bio-col {
+    text-align: center;
+    border-right: 1px solid var(--border); /* Editorial vertical line */
+    padding-right: 2rem;
+  }
+
+  .home-portrait {
+    width: 200px; /* Larger photo */
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-strong);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+  }
+
+  .name-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* Right Column */
+  .intro-col {
+    padding-left: 1rem;
+  }
+
+  .headline {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    border: none; /* Remove default underline */
+  }
+
+  .body-text {
+    font-size: 1.2rem;
+    color: var(--text-body);
+    max-width: 35ch;
+    margin-bottom: 3rem;
+  }
+
+  .quote-block {
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 1.5rem;
+  }
+  
+  .quote-block p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+  }
+
+  /* Mobile Stack */
+  @media (max-width: 768px) {
+    .home-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2rem;
+    }
+    .bio-col {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+    }
+    .intro-col {
+      padding-left: 0;
+    }
+    .body-text {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .quote-block {
+      text-align: left; /* Keep quote readable */
+      margin: 0 auto;
+      max-width: 400px;
+    }
+  }
+</style>

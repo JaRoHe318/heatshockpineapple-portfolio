@@ -1,0 +1,54 @@
+.
+├── astro.config.mjs
+├── package-lock.json
+├── package.json
+├── public
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512.png
+│   ├── apple-touch-icon.png
+│   ├── CNAME
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── favicon.ico
+│   ├── files
+│   │   └── Jason_Hernandez_Resume.pdf
+│   ├── images
+│   │   ├── about-cover.jpg
+│   │   ├── placeholder.txt
+│   │   ├── portfolio
+│   │   │   ├── photo1.jpg
+│   │   │   ├── photo2.jpg
+│   │   │   └── photo3.jpg
+│   │   └── portrait.jpg
+│   ├── robots.txt
+│   ├── site.webmanifest
+│   ├── sitemap.xml
+│   └── social-preview.png
+├── README.md
+├── src
+│   ├── components
+│   │   ├── BindingCurve.astro
+│   │   ├── Card.astro
+│   │   ├── Footer.astro
+│   │   ├── Header.astro
+│   │   ├── MicroscopeBackground.astro
+│   │   └── ProteinViewer.astro
+│   ├── content
+│   ├── data
+│   ├── env.d.ts
+│   ├── layouts
+│   │   ├── BaseLayout.astro
+│   │   └── BlogPost.astro
+│   ├── pages
+│   │   ├── 404.astro
+│   │   ├── about.astro
+│   │   ├── code.astro
+│   │   ├── index.astro
+│   │   ├── resources.astro
+│   │   └── science.astro
+│   └── styles
+│       └── global.css
+├── tree.txt
+└── tsconfig.json
+
+12 directories, 40 files
