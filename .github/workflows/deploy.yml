@@ -1,0 +1,36 @@
+name: Deploy Astro Portfolio to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use a standard, stable Node version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Astro site
+        run: npm run build
+      
+      - name: Configure GitHub Pages Pathing
+        # This step handles the unique subfolder requirement of GitHub Pages
+        run: echo 'export const ASSET_PREFIX = "/heatshockpineapple-portfolio";' > public/_assets_prefix.js
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # Tells it to deploy the output of the Astro build
+          # This ensures the custom domain file is correctly used:
+          cname: portfolio.heatshockpineapple.com
