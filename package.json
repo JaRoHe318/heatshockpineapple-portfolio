@@ -14,7 +14,8 @@
     "astro": "^4.0.0",
     "exif-parser": "^0.1.12",
     "ngl": "^2.4.0",
-    "plotly.js-dist-min": "^3.3.0"
+    "plotly.js-dist-min": "^3.3.0",
+    "@heatshockpineapple/design-tokens": "github:jarohe318/pineapple-design-tokens"
   },
   "devDependencies": {
     "@astrojs/check": "^0.3.0",
