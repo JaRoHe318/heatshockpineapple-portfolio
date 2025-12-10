@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://heatshockpineapple.com/sitemap.xml
+Sitemap: https://portfolio.heatshockpineapple.com/sitemap.xml
