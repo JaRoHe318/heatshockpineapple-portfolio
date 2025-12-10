@@ -1,9 +1,10 @@
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://heatshockpineapple.com',
-  // *** ADD THIS NEW LINE ***
-  base: '/heatshockpineapple-portfolio/', 
+  // *** DELETE THIS LINE ***
+  // base: '/heatshockpineapple-portfolio/', 
   // *************************
   output: 'static',
   build: {
