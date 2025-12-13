@@ -1,5 +1,5 @@
 ---
-const currentYear = new Date().getFullYear();
+const today = new Date();
 ---
 
 <footer class="site-footer">
@@ -9,44 +9,64 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 
-  <div class="footer-content">
-    <p>&copy; {currentYear} Jason Hernandez.</p>
-    <div class="footer-links">
-      <a href="https://github.com/jarohe318" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://heatshockpineapple.substack.com" target="_blank" rel="noopener noreferrer">Substack</a>
-      <a href="https://www.linkedin.com/in/jrh318" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <div class="footer-inner">
+    
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <span class="brand-text">Heat Shock <span class="gold">Pineapple</span></span>
+      </div>
+      <div class="copyright">
+        &copy; {today.getFullYear()} Jason Hernandez. All rights reserved.
+      </div>
     </div>
+
+    <div class="footer-links-col">
+      <ul class="link-list">
+        <li><a href="https://github.com/JaRoHe318" target="_blank">GitHub</a></li>
+        <li><a href="https://heatshockpineapple.substack.com" target="_blank">Substack</a></li>
+        <li><a href="https://linkedin.com/in/JaRoHe318" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:jrh@heatshockpineapple.com">Email</a></li>
+      </ul>
+    </div>
+
   </div>
 </footer>
 
 <style>
+  /* === 1. CONTAINER (Matches Blog) === */
   .site-footer {
-    margin-top: 6rem;
-    border-top: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    overflow: hidden; /* Important for the scroller */
+    /* Locked to Deep Jungle Green */
+    background: #243b30; 
+    color: #fff;
+    padding-bottom: 2.5rem; /* Padding at bottom, top is handled by tape */
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden; /* Keeps the tape from scrolling the page */
   }
 
-  /* The Container for the Tape */
+  /* === 2. THE DNA TAPE (Portfolio Exclusive) === */
   .sequence-tape {
     width: 100%;
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0.4rem 0;
-    margin-bottom: 2rem;
-    user-select: none; /* Aesthetic only, don't let them select it */
-    opacity: 0.5;
+    /* Darker track to sit nicely on the Green background */
+    background: rgba(0, 0, 0, 0.2); 
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 0.6rem 0;
+    margin-bottom: 2rem; /* Spacing between tape and content */
+    user-select: none;
   }
 
-  /* The Moving Text */
   .scrolling-text {
     white-space: nowrap;
+    font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    color: var(--accent-primary);
-    animation: scroll 120s linear infinite; /* Very slow, ambient drift */
+    letter-spacing: 0.15em;
+    
+    /* GOLD TEXT to match the Pineapple branding below */
+    color: var(--accent-secondary); 
+    opacity: 0.8;
+    
+    animation: scroll 120s linear infinite; 
   }
 
   @keyframes scroll {
@@ -54,37 +74,83 @@ const currentYear = new Date().getFullYear();
     100% { transform: translateX(-50%); }
   }
 
-  .footer-content {
-    max-width: var(--max-width);
+  /* === 3. LAYOUT & CONTENT (Matches Blog) === */
+  .footer-inner {
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 2rem 2rem;
+    padding: 0 2rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 2rem;
   }
 
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .footer-links a {
-    border-bottom: none;
-    color: var(--text-muted);
-    transition: color 0.2s ease;
-  }
-
-  .footer-links a:hover {
-    color: var(--accent-primary);
-  }
-
-  @media (max-width: 768px) {
-    .footer-content {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
+  /* Desktop: Side-by-side layout */
+  @media (min-width: 768px) {
+    .footer-inner {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center; 
+      gap: 0;
     }
+  }
+
+  /* BRAND COLUMN */
+  .footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    word-spacing: -0.15em;
+  }
+  
+  .gold { 
+    color: var(--accent-secondary); 
+    font-style: normal; 
+    font-size: 1.02em;
+    margin-left: 0;
+  }
+
+  .copyright {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* LINKS COLUMN */
+  .footer-links-col {
+    display: flex;
+    align-items: center;
+  }
+
+  .link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 2rem; 
+  }
+
+  .link-list li { display: flex; align-items: center; }
+
+  .link-list a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .link-list a:hover { 
+    color: #ffffff; 
   }
 </style>
