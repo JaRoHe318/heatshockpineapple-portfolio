@@ -1,9 +1,7 @@
 ---
 // NAVIGATION CONFIGURATION
 const BRAND_LINK = "https://heatshockpineapple.com"; // Points to the main Hub
-const RESEARCH_LINK = "/";                           // Points to Portfolio Home
-const PHOTOS_LINK = "https://photos.heatshockpineapple.com";
-const BLOG_LINK = "https://blog.heatshockpineapple.com";
+
 
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); 
@@ -28,7 +26,7 @@ const currentPath = pathname.slice(1);
         <a href="/about" class={currentPath.startsWith("about") ? "active" : ""}>About</a>
 
         <div class="mobile-icons">
-          <button class="icon-btn theme-trigger" aria-label="Toggle Dark Mode" type="button">
+          <button class="icon-btn theme-toggle" aria-label="Toggle Dark Mode" type="button">
             <span class="theme-text">Theme</span>
             <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -38,7 +36,7 @@ const currentPath = pathname.slice(1);
 
       <div class="control-separator desktop-only"></div>
 
-      <button class="icon-btn theme-trigger desktop-only" aria-label="Toggle Dark Mode" type="button">
+      <button class="icon-btn theme-toggle desktop-only" aria-label="Toggle Dark Mode" type="button">
         <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
       </button>
@@ -53,10 +51,17 @@ const currentPath = pathname.slice(1);
 
 <script type="module">
   function setupHeader() {
+    // 1. SELECT ELEMENTS
     let menuToggle = document.getElementById('menu-toggle');
     const nav = document.getElementById('site-nav');
+    const searchBtns = document.querySelectorAll('.search-trigger');
+    const searchModal = document.getElementById('search-modal');
+    const modalBg = document.getElementById('modal-bg');
     
-    // Helper to clear old event listeners
+    // NEW: Select Theme Buttons directly
+    const themeToggles = document.querySelectorAll('.theme-toggle');
+
+    // HELPER: Strips old listeners so we don't duplicate them
     const replaceWithClone = (el) => {
       if (!el?.parentNode) return el;
       const clone = el.cloneNode(true);
@@ -64,39 +69,116 @@ const currentPath = pathname.slice(1);
       return clone;
     };
 
+    // --- 2. MOBILE MENU LOGIC ---
     if (menuToggle && nav) {
       const newToggle = replaceWithClone(menuToggle);
       menuToggle = newToggle;
 
+      // Toggle Button
       menuToggle.addEventListener('click', (e) => {
         e.stopPropagation();
         menuToggle.classList.toggle('open');
         nav.classList.toggle('open');
       });
 
-      // Close menu when clicking a link
+      // Link Click (Close)
       nav.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
           menuToggle.classList.remove('open');
           nav.classList.remove('open');
         });
       });
+
+      // Background Click (Close)
+      nav.addEventListener('click', (e) => {
+        if (e.target === nav) {
+          menuToggle.classList.remove('open');
+          nav.classList.remove('open');
+        }
+      });
     }
 
-    document.querySelectorAll('.theme-trigger').forEach((btn) => {
+    // --- 3. SEARCH LOGIC ---
+    window.__hspSearch = window.__hspSearch || {};
+    
+    function openModal() {
+      if (!searchModal) return;
+      if (nav) nav.classList.remove('open');
+      const currentToggle = document.getElementById('menu-toggle');
+      if (currentToggle) currentToggle.classList.remove('open');
+
+      searchModal.classList.add('open');
+      searchModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      setTimeout(() => { searchModal.querySelector('input')?.focus(); }, 50);
+    }
+
+    function closeModal() {
+      if (!searchModal) return;
+      searchModal.classList.remove('open');
+      searchModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+
+    window.__hspSearch.open = openModal;
+    window.__hspSearch.close = closeModal;
+
+    // Wire Search Buttons
+    searchBtns.forEach((btn) => {
       const newBtn = replaceWithClone(btn);
-      newBtn.addEventListener('click', () => {
+      newBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal();
+      });
+    });
+
+    if (modalBg) {
+        const newBg = replaceWithClone(modalBg);
+        newBg.addEventListener('click', closeModal);
+    }
+
+    // --- 4. THEME TOGGLE (DIRECT BINDING) ---
+    // This is the specific fix for mobile.
+    themeToggles.forEach((btn) => {
+      // Clean up old listeners
+      const newBtn = replaceWithClone(btn);
+      
+      newBtn.addEventListener('click', (e) => {
+        // PREVENT the click from bubbling to the mobile menu background
+        e.stopPropagation(); 
+        
         const element = document.documentElement;
         const current = element.getAttribute("data-theme");
         const next = current === "dark" ? "light" : "dark";
+        
         element.setAttribute("data-theme", next);
         localStorage.setItem("theme", next);
       });
     });
+
+    // --- 5. KEYBOARD GUARDS ---
+    if (!window.__hspHeaderKeydownBound) {
+      window.__hspHeaderKeydownBound = true;
+      document.addEventListener('keydown', (e) => {
+        const activeModal = document.getElementById('search-modal');
+        const isOpen = activeModal?.classList.contains('open');
+
+        if (e.key === 'Escape' && isOpen) {
+          closeModal();
+        }
+        
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+             e.preventDefault();
+             openModal();
+        }
+      });
+    }
   }
 
+  // Run on initial load
   setupHeader();
-  document.addEventListener('astro:page-load', setupHeader);
+  
+  // Run on View Transitions navigation
   document.addEventListener('astro:after-swap', setupHeader);
 </script>
 
