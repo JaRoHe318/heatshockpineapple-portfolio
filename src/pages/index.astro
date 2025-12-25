@@ -4,125 +4,256 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout 
   title="Heat Shock Pineapple"
-  description="Personal site for biochemistry, data analysis, and photography.">
+  description="Computational Biochemist specializing in assay development and data analysis.">
   
-  <section class="home-grid">
-    <div class="bio-col">
-      <img 
-        src="/images/me/portrait.jpg" 
-        alt="Jason Hernandez" 
-        class="home-portrait"
-        loading="eager" 
-      />
-      <h1 class="name-title">Jason Hernandez</h1>
-      <p class="role-list mono-meta">Biochemist · Data Scientist · Photographer</p>
+  <section class="hero-wrapper">
+    
+    <div class="text-content">
+      <div class="identity-block">
+        <h1 class="name-title">Jason Hernandez</h1>
+        <h2 class="role-title mono-meta">Computational Biochemist</h2>
+      </div>
+
+      <div class="value-prop">
+        <p class="lead-text">
+          Bridging the gap between <span class="highlight">wet lab rigour</span> and <span class="highlight">computational workflow</span>.
+        </p>
+        <p class="body-text">
+          I design reproducible protein assays, build Python tools for high-throughput screening, and visualize complex structural data.
+        </p>
+      </div>
+
+      <div class="cta-row">
+        <a href="/science" class="btn-primary">View Research</a>
+        <a href="/code" class="btn-secondary">See Code</a>
+      </div>
     </div>
 
-    <div class="intro-col">
-      <h2 class="headline">Heat Shock Portfolio</h2>
-      <p class="body-text">
-        I design protein assays, analyze noisy data, and document the world through a lens. 
-        This site collects the work that happens when those three overlap.
-      </p>
+    <div class="visual-content">
+      <div class="portrait-frame">
+        <img 
+          src="/images/me/portrait.jpg" 
+          alt="Jason Hernandez" 
+          class="home-portrait"
+          loading="eager" 
+        />
+        <div class="orbit-ring"></div>
+      </div>
+      
+      <div class="status-badge mono-meta">
+        <span class="status-dot"></span> Open for collaboration
+      </div>
 
-      <div class="quote-block">
+      <div class="quote-card">
         <p>“Nearly everything is really interesting if you go into it deeply enough.”</p>
         <cite>— Richard Feynman</cite>
       </div>
     </div>
-  </section>
 
+  </section>
 </BaseLayout>
 
 <style>
-  .home-grid {
+  /* === LAYOUT === */
+  .hero-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1.5fr; /* Split layout */
+    grid-template-columns: 1.1fr 0.9fr; /* Slightly wider text col */
     gap: 4rem;
-    align-items: center;
-    min-height: 60vh;
-    margin-top: 2rem;
+    align-items: center; /* Vertically center everything */
+    min-height: 70vh;
+    padding-top: 1rem;
   }
 
-  /* Left Column */
-  .bio-col {
-    text-align: center;
-    border-right: 1px solid var(--border); /* Editorial vertical line */
-    padding-right: 2rem;
-  }
-
-  .home-portrait {
-    width: 200px; /* Larger photo */
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--border-strong);
-    margin-bottom: 1.5rem;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+  /* === TEXT COLUMN === */
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
   }
 
   .name-title {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
     letter-spacing: -0.02em;
   }
 
-  /* Right Column */
-  .intro-col {
-    padding-left: 1rem;
+  .role-title {
+    font-size: 1rem;
+    color: var(--accent-primary); /* Now Green */
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-secondary); /* Gold Underline */
   }
 
-  .headline {
-    font-size: 2.5rem;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    border: none; /* Remove default underline */
+  .lead-text {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.35;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+  }
+
+  .highlight {
+    /* Subtle green highlight */
+    background: linear-gradient(to bottom, transparent 65%, rgba(45, 90, 69, 0.1) 65%);
+    color: inherit;
   }
 
   .body-text {
-    font-size: 1.2rem;
-    color: var(--text-body);
-    max-width: 35ch;
-    margin-bottom: 3rem;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 48ch;
+    line-height: 1.6;
   }
 
-  .quote-block {
-    border-left: 3px solid var(--accent-primary);
-    padding-left: 1.5rem;
+  /* === BUTTONS === */
+  .cta-row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn-primary, .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.6rem;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: var(--accent-primary); /* Green */
+    color: #ffffff;
+    border: 1px solid var(--accent-primary);
+  }
+  .btn-primary:hover {
+    background: var(--text-main); /* Dark on hover */
+    border-color: var(--text-main);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  /* === VISUAL COLUMN === */
+  .visual-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .portrait-frame {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .home-portrait {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 2;
+    border: 1px solid var(--border);
+  }
+
+  .orbit-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px dashed var(--border);
+    border-radius: 50%;
+    z-index: 1;
+    animation: spin 60s linear infinite;
+    opacity: 0.5;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-secondary); /* Gold */
+    border-radius: 50%;
+  }
+
+  /* QUOTE CARD */
+  .quote-card {
+    margin-top: 1rem;
+    max-width: 320px;
   }
   
-  .quote-block p {
+  .quote-card p {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 1rem;
     color: var(--text-main);
     margin-bottom: 0.5rem;
   }
 
-  /* Mobile Stack */
-  @media (max-width: 768px) {
-    .home-grid {
+  .quote-card cite {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* === MOBILE === */
+  @media (max-width: 900px) {
+    .hero-wrapper {
       grid-template-columns: 1fr;
-      text-align: center;
+      text-align: left;
+      gap: 3rem;
+      padding-top: 0;
+    }
+
+    .text-content {
+      order: 1; 
       gap: 2rem;
     }
-    .bio-col {
-      border-right: none;
-      padding-right: 0;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 2rem;
+
+    .visual-content {
+      order: 2;
+      border-top: 1px solid var(--border); /* Divider */
+      padding-top: 3rem;
+      width: 100%;
     }
-    .intro-col {
-      padding-left: 0;
-    }
-    .body-text {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .quote-block {
-      text-align: left; /* Keep quote readable */
-      margin: 0 auto;
-      max-width: 400px;
-    }
+
+    .name-title { font-size: 2.5rem; }
+    
+    .portrait-frame { width: 200px; height: 200px; }
+    .home-portrait { width: 170px; height: 170px; }
+    
+    .cta-row { width: 100%; }
+    .btn-primary, .btn-secondary { flex: 1; }
   }
 </style>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binding Curve Sandbox</title>
+  
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  
+  <style>
+    /* "Paper" Style: Clean white background for publication quality */
+    body, html { 
+      margin: 0; padding: 0; 
+      width: 100%; height: 100%; 
+      overflow: hidden; 
+      background: #ffffff; 
+    }
+    #container { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+
+  <div id="container"></div>
+
+  <script>
+    // --- 1. CONSTANTS ---
+    const textColor = '#333333';
+    const gridColor = '#e0e0e0';
+    const petrolBlue = '#1f6f78';
+    const brandGold = '#FFD700';
+    const kdValue = 5.01;
+
+    // --- 2. DATA GENERATION ---
+    const concentrations = [0.01, 0.1, 0.3, 1, 3, 10, 30, 100, 300, 1000];
+    const signal =         [2,    5,   12,  25, 45, 75, 88,  95,  98,  100];
+    
+    // Generate smooth 4PL curve
+    const xFit = []; 
+    const yFit = [];
+    for (let i = -2; i < 3.5; i += 0.05) {
+      const x = Math.pow(10, i);
+      xFit.push(x);
+      yFit.push(100 / (1 + Math.pow(10, (0.7 - i))));
+    }
+
+    // --- 3. LAYOUT ---
+    const layout = {
+      margin: { l: 70, r: 20, t: 20, b: 60 },
+      
+      xaxis: {
+        type: 'log', 
+        title: { text: '<b>[Ligand] (nM)</b>', standoff: 20 },
+        tickvals: [0.01, 0.1, 1, 10, 100, 1000],
+        // FIX: Manually wrapped in <b> tags
+        ticktext: ['<b>0.01</b>', '<b>0.1</b>', '<b>1</b>', '<b>10</b>', '<b>100</b>', '<b>1000</b>'],
+        
+        // Minor ticks configuration
+        dtick: 1, 
+        minor: { dtick: "D1", ticklen: 4, tickwidth: 1, showgrid: false },
+        
+        range: [-2, 3], // Explicit log range
+        color: textColor, gridcolor: gridColor, linecolor: textColor, mirror: true,
+        linewidth: 2, // Thicker axis line
+        tickfont: { family: 'sans-serif', size: 12 },
+        titlefont: { family: 'sans-serif', size: 14 }
+      },
+      
+      yaxis: {
+        title: { text: '<b>Bound Fraction (%)</b>', standoff: 20 },
+        range: [-5, 115],
+        
+        // FIX: Manually define ticks and wrap in <b> tags to force boldness
+        tickvals: [0, 25, 50, 75, 100],
+        ticktext: ['<b>0</b>', '<b>25</b>', '<b>50</b>', '<b>75</b>', '<b>100</b>'],
+        
+        color: textColor, gridcolor: gridColor, linecolor: textColor, mirror: true,
+        linewidth: 2, // Thicker axis line
+        tickfont: { family: 'sans-serif', size: 12 },
+        titlefont: { family: 'sans-serif', size: 14 }
+      },
+      
+      paper_bgcolor: '#ffffff',
+      plot_bgcolor: '#ffffff',
+      showlegend: false,
+      dragmode: false,
+      
+      // ANNOTATION: Kd Marker
+      shapes: [
+        {
+          type: 'line',
+          x0: kdValue, x1: kdValue,
+          y0: -5, y1: 50,
+          line: { color: '#666', width: 2, dash: 'dot' }
+        },
+        {
+          type: 'line',
+          x0: 0.01, x1: kdValue,
+          y0: 50, y1: 50,
+          line: { color: '#666', width: 2, dash: 'dot' }
+        }
+      ],
+      annotations: [
+        {
+          x: Math.log10(kdValue), y: 58,
+          text: '<b><i>K</i><sub>d</sub> = 5 nM</b>',
+          showarrow: false,
+          font: { size: 12, color: '#333' }
+        }
+      ]
+    };
+
+    // --- 4. TRACES ---
+    const data = [
+      {
+        x: xFit, y: yFit, mode: 'lines',
+        name: 'Fit',
+        line: { color: brandGold, width: 4 },
+        hoverinfo: 'skip'
+      },
+      {
+        x: concentrations, y: signal, mode: 'markers',
+        name: 'Data',
+        marker: { color: petrolBlue, size: 12, line: { color: 'white', width: 1 } },
+        hovertemplate: '<b>%{y:.1f}% Bound</b><br>at %{x} nM<extra></extra>'
+      }
+    ];
+
+    // --- 5. RENDER ---
+    Plotly.newPlot('container', data, layout, { displayModeBar: false, responsive: true });
+
+    window.addEventListener('resize', () => {
+      Plotly.Plots.resize(document.getElementById('container'));
+    });
+  </script>
+</body>
+</html>

@@ -1,10 +1,17 @@
 ---
-// NAVIGATION CONFIGURATION
-const BRAND_LINK = "https://heatshockpineapple.com"; // Points to the main Hub
-
+/* src/components/Header.astro */
+const BRAND_LINK = "https://heatshockpineapple.com"; 
+const HOME_LINK = "/"; 
 
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1); 
+const currentPath = pathname.slice(1);
+
+/* HELPER: Checks active state for links */
+const isActive = (path: string) => {
+  if (path === HOME_LINK) return currentPath === "";
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return currentPath.startsWith(cleanPath);
+};
 ---
 
 <header class="site-header">
@@ -18,18 +25,31 @@ const currentPath = pathname.slice(1);
     </a>
 
     <div class="header-controls">
-      <nav id="site-nav" class="site-nav">
-        <a href="/" class={currentPath === "" ? "active" : ""}>Home</a>
-        <a href="/science" class={currentPath.startsWith("science") ? "active" : ""}>Science</a>
-        <a href="/code" class={currentPath.startsWith("code") ? "active" : ""}>Code</a>
-        <a href="/resources" class={currentPath.startsWith("resources") ? "active" : ""}>Resources</a>
-        <a href="/about" class={currentPath.startsWith("about") ? "active" : ""}>About</a>
+      <nav id="site-nav" class="site-nav" aria-label="Main Navigation">
+        
+        <a href={HOME_LINK} class={isActive(HOME_LINK) ? "active" : ""} aria-current={isActive(HOME_LINK) ? "page" : undefined}>
+          Home
+        </a>
+
+        <a href="/science" class={isActive("/science") ? "active" : ""} aria-current={isActive("/science") ? "page" : undefined}>
+          Science
+        </a>
+
+        <a href="/code" class={isActive("/code") ? "active" : ""} aria-current={isActive("/code") ? "page" : undefined}>
+          Code
+        </a>
+
+        <a href="/about" class={isActive("/about") ? "active" : ""} aria-current={isActive("/about") ? "page" : undefined}>
+          About
+        </a>
 
         <div class="mobile-icons">
           <button class="icon-btn theme-toggle" aria-label="Toggle Dark Mode" type="button">
-            <span class="theme-text">Theme</span>
-            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <span class="theme-text">Switch Theme</span>
+            <div class="icon-row">
+              <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </div>
           </button>
         </div>
       </nav>
@@ -41,7 +61,7 @@ const currentPath = pathname.slice(1);
         <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
       </button>
 
-      <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Menu" type="button">
+      <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Menu" aria-controls="site-nav" aria-expanded="false" type="button">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
       
@@ -49,177 +69,117 @@ const currentPath = pathname.slice(1);
   </div>
 </header>
 
-<script type="module">
+<script>
   function setupHeader() {
-    // 1. SELECT ELEMENTS
-    let menuToggle = document.getElementById('menu-toggle');
+    // TYPESCRIPT FIX 1: Explicitly cast 'menuToggle' as an HTML element (or null)
+    let menuToggle = document.getElementById('menu-toggle') as HTMLElement | null;
     const nav = document.getElementById('site-nav');
-    const searchBtns = document.querySelectorAll('.search-trigger');
-    const searchModal = document.getElementById('search-modal');
-    const modalBg = document.getElementById('modal-bg');
-    
-    // NEW: Select Theme Buttons directly
     const themeToggles = document.querySelectorAll('.theme-toggle');
 
-    // HELPER: Strips old listeners so we don't duplicate them
-    const replaceWithClone = (el) => {
+    // TYPESCRIPT FIX 2: Add type ': Element' to the parameter
+    const replaceWithClone = (el: Element): Element => {
       if (!el?.parentNode) return el;
-      const clone = el.cloneNode(true);
+      // TYPESCRIPT FIX 3: Cast the return of cloneNode
+      const clone = el.cloneNode(true) as Element;
       el.parentNode.replaceChild(clone, el);
       return clone;
     };
 
-    // --- 2. MOBILE MENU LOGIC ---
     if (menuToggle && nav) {
-      const newToggle = replaceWithClone(menuToggle);
+      // Reassign to the new cloned element
+      const newToggle = replaceWithClone(menuToggle) as HTMLElement;
       menuToggle = newToggle;
 
-      // Toggle Button
-      menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        menuToggle.classList.toggle('open');
-        nav.classList.toggle('open');
-      });
+      // TYPESCRIPT FIX 4: Add type ': boolean' to isOpen
+      const setMenuState = (isOpen: boolean) => {
+        // TYPESCRIPT FIX 5: Ensure menuToggle exists inside this function scope
+        if (!menuToggle) return;
 
-      // Link Click (Close)
-      nav.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
+        if (isOpen) {
+          menuToggle.classList.add('open');
+          menuToggle.setAttribute('aria-expanded', 'true');
+          nav.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        } else {
           menuToggle.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
           nav.classList.remove('open');
-        });
-      });
-
-      // Background Click (Close)
-      nav.addEventListener('click', (e) => {
-        if (e.target === nav) {
-          menuToggle.classList.remove('open');
-          nav.classList.remove('open');
+          document.body.style.overflow = '';
         }
-      });
-    }
+      };
 
-    // --- 3. SEARCH LOGIC ---
-    window.__hspSearch = window.__hspSearch || {};
-    
-    function openModal() {
-      if (!searchModal) return;
-      if (nav) nav.classList.remove('open');
-      const currentToggle = document.getElementById('menu-toggle');
-      if (currentToggle) currentToggle.classList.remove('open');
-
-      searchModal.classList.add('open');
-      searchModal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-      setTimeout(() => { searchModal.querySelector('input')?.focus(); }, 50);
-    }
-
-    function closeModal() {
-      if (!searchModal) return;
-      searchModal.classList.remove('open');
-      searchModal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('modal-open');
-    }
-
-    window.__hspSearch.open = openModal;
-    window.__hspSearch.close = closeModal;
-
-    // Wire Search Buttons
-    searchBtns.forEach((btn) => {
-      const newBtn = replaceWithClone(btn);
-      newBtn.addEventListener('click', (e) => {
+      // TYPESCRIPT FIX 6: Add type ': Event' to 'e'
+      menuToggle.addEventListener('click', (e: Event) => {
         e.stopPropagation();
-        openModal();
+        const isCurrentlyOpen = nav.classList.contains('open');
+        setMenuState(!isCurrentlyOpen);
       });
-    });
 
-    if (modalBg) {
-        const newBg = replaceWithClone(modalBg);
-        newBg.addEventListener('click', closeModal);
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMenuState(false));
+      });
+      
+      // TYPESCRIPT FIX 7: Add type ': Event' to 'e'
+      nav.addEventListener('click', (e: Event) => {
+        if (e.target === nav) setMenuState(false);
+      });
     }
 
-    // --- 4. THEME TOGGLE (DIRECT BINDING) ---
-    // This is the specific fix for mobile.
+    // THEME TOGGLE
     themeToggles.forEach((btn) => {
-      // Clean up old listeners
       const newBtn = replaceWithClone(btn);
-      
-      newBtn.addEventListener('click', (e) => {
-        // PREVENT the click from bubbling to the mobile menu background
+      // TYPESCRIPT FIX 8: Add type ': Event' to 'e'
+      newBtn.addEventListener('click', (e: Event) => {
         e.stopPropagation(); 
-        
         const element = document.documentElement;
         const current = element.getAttribute("data-theme");
         const next = current === "dark" ? "light" : "dark";
-        
         element.setAttribute("data-theme", next);
         localStorage.setItem("theme", next);
       });
     });
-
-    // --- 5. KEYBOARD GUARDS ---
-    if (!window.__hspHeaderKeydownBound) {
-      window.__hspHeaderKeydownBound = true;
-      document.addEventListener('keydown', (e) => {
-        const activeModal = document.getElementById('search-modal');
-        const isOpen = activeModal?.classList.contains('open');
-
-        if (e.key === 'Escape' && isOpen) {
-          closeModal();
-        }
-        
-        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-             e.preventDefault();
-             openModal();
-        }
-      });
-    }
   }
 
-  // Run on initial load
+  // Run on initial load & View Transitions
   setupHeader();
-  
-  // Run on View Transitions navigation
   document.addEventListener('astro:after-swap', setupHeader);
+  document.addEventListener('astro:page-load', setupHeader);
 </script>
 
 <style>
-  /* === THE NEW ECOSYSTEM STYLE === */
+  /* === HEADER LAYOUT (Matches Photos Standard) === */
   .site-header { 
     position: sticky; top: 0; z-index: 1000; padding: 1.2rem 0;
   }
   
-  /* The "Jungle Glass" Green Background */
   .site-header::before {
     content: ""; position: absolute; inset: 0; z-index: -1;
-    background: #243b30; 
+    /* TOKEN: Jungle Green matches Photos */
+    background: var(--color-jungle-800); 
     opacity: 0.95;
     backdrop-filter: blur(12px);
+    /* TOKEN: Border opacity */
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
 
   .header-inner { 
-    width: 100%; max-width: 1600px; margin: 0 auto; 
+    width: 100%; 
+    max-width: 1600px; 
+    margin: 0 auto;
     padding: 0 2rem; 
     display: flex; justify-content: space-between; align-items: center; 
   }
   
-  /* BRAND */
+  /* BRANDING */
   .site-title { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; z-index: 1002; }
   
   .brand-text { 
-    font-family: var(--font-serif); 
-    font-weight: 600; 
-    font-size: 1.3rem; 
-    color: #ffffff;
-    word-spacing: -0.15em;
-    letter-spacing: 0.01em; 
+    font-family: var(--font-serif); font-weight: 600; font-size: 1.3rem; 
+    color: var(--text-inverse); /* */
+    word-spacing: -0.15em; letter-spacing: 0.01em;
   }
   
-  .gold { 
-    color: var(--accent-secondary); /* or #a87e23 */
-    font-style: normal;
-    font-size: 1.02em; 
-  }
+  .gold { font-style: normal; font-size: 1.02em; color: var(--brand-secondary); }
 
   .header-logo { height: 32px; width: auto; border-radius: 4px; }
 
@@ -230,17 +190,18 @@ const currentPath = pathname.slice(1);
   /* ICONS */
   .icon-btn { 
     background: none; border: none; cursor: pointer; padding: 5px; display: flex; align-items: center; transition: color 0.2s;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.7); /* */
   }
-  .icon-btn:hover { color: #ffffff; }
+  .icon-btn:hover { color: var(--text-inverse); }
+  .icon-row { display: flex; align-items: center; gap: 10px; }
 
   /* NAV LINKS */
   .site-nav { display: flex; gap: 1.5rem; }
   .site-nav a { 
     font-size: 1.05rem; font-weight: 500; text-decoration: none; font-family: var(--font-sans); 
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.7); /* */
   }
-  .site-nav a:hover, .site-nav a.active { color: #ffffff; }
+  .site-nav a:hover, .site-nav a.active { color: var(--text-inverse); }
   
   /* THEME ICONS */
   .moon-icon { display: none; }
@@ -252,10 +213,11 @@ const currentPath = pathname.slice(1);
   .menu-toggle { display: none; }
   .mobile-icons { display: none; }
 
-  @media (max-width: 900px) { /* Trigger mobile menu slightly earlier since you have 5 links */
+  @media (max-width: 900px) { 
     .desktop-only { display: none !important; }
+    
     .menu-toggle { display: flex; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; background: transparent; border: none; cursor: pointer; z-index: 1002; padding: 0; }
-    .bar { width: 100%; height: 3px; background-color: #ffffff; border-radius: 3px; transition: all 0.3s ease; }
+    .bar { width: 100%; height: 3px; background-color: var(--text-inverse); border-radius: 3px; transition: all 0.3s ease; }
     
     .menu-toggle.open .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
     .menu-toggle.open .bar:nth-child(2) { opacity: 0; }
@@ -264,16 +226,15 @@ const currentPath = pathname.slice(1);
     .site-nav { display: none; }
     .site-nav.open {
       display: flex; position: fixed; inset: 0; 
-      background-color: #243b30;
+      background-color: var(--color-jungle-800); /* */
       flex-direction: column; justify-content: center; align-items: center; gap: 2rem; z-index: 1001;
     }
-    .site-nav.open a { font-size: 1.5rem; font-weight: 600; color: #fff; }
+    .site-nav.open a { font-size: 1.5rem; font-weight: 600; color: var(--text-inverse); }
     
-    /* Adjusted mobile icons for just theme button */
     .mobile-icons { 
       display: flex; gap: 2rem; margin-top: 2rem; padding-top: 2rem; 
       border-top: 1px solid rgba(255,255,255,0.2); 
     }
-    .mobile-icons .icon-btn { flex-direction: column; gap: 8px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; }
+    .mobile-icons .icon-btn { flex-direction: column; gap: 8px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-inverse); }
   }
 </style>

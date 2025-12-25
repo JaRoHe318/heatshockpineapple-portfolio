@@ -1,8 +1,11 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+/* src/layouts/BaseLayout.astro */
+import { ClientRouter } from 'astro:transitions'; 
+import "../styles/global.css";
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import MicroscopeBackground from '../components/MicroscopeBackground.astro';
-import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -17,7 +20,6 @@ interface Props {
 const {
   title,
   description,
-  // FIX 1: Update default to your new Branded Social Card
   image = '/social-preview.png', 
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
   type = 'website',
@@ -33,6 +35,7 @@ const socialImageURL = new URL(image, Astro.site).href;
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <ClientRouter />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
@@ -69,16 +72,23 @@ const socialImageURL = new URL(image, Astro.site).href;
   ))}
   
   <script is:inline>
-    (function () {
+    const setMode = () => {
       try {
-        var stored = window.localStorage.getItem('theme');
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var theme = stored || (prefersDark ? 'dark' : 'light');
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // Default to stored, otherwise fall back to system preference
+        const theme = stored || (prefersDark ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', theme);
       } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'light');
+        console.error(e);
       }
-    })();
+    };
+
+    // Run on initial load
+    setMode();
+
+    // CRITICAL FIX: Run again after Astro swaps the page content
+    document.addEventListener('astro:after-swap', setMode);
   </script>
 </head>
 <body>
@@ -92,19 +102,5 @@ const socialImageURL = new URL(image, Astro.site).href;
   </main>
   
   <Footer />
-
-  <script>
-    const toggle = document.querySelector('.theme-toggle');
-    const html = document.documentElement;
-
-    if (toggle) {
-      toggle.addEventListener('click', () => {
-        const current = html.getAttribute('data-theme');
-        const next = current === 'light' ? 'dark' : 'light';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-      });
-    }
-  </script>
 </body>
 </html>

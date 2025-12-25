@@ -1,75 +1,113 @@
-<div id="viewport" class="protein-container"></div>
-<div class="protein-caption mono-meta">
-  Structure: Hsp70 (PDB: 5NRO) · <span id="loading-text">Loading crystal structure...</span>
+<div class="viewer-wrapper">
+  <div id="viewport" class="protein-container"></div>
+  
+  <div id="loading-overlay" class="loading-state">
+    <span class="mono-meta">Loading 3D Structure...</span>
+  </div>
 </div>
 
 <script>
-  import * as NGL from 'ngl';
-
-  // 1. Setup the Stage
-  const stage = new NGL.Stage("viewport", {
-    backgroundColor: "white", 
-    tooltip: false
-    // Removed hardcoded fog parameters to prevent the "disappearing" issue
-  });
-
-  // 2. Handle Resizing
-  window.addEventListener("resize", function () {
-    stage.handleResize();
-  });
-
-  // 3. Load the Hsp70 Structure
-  stage.loadFile("rcsb://5NRO").then(function (component: any) {
+  async function initProteinViewer() {
+    const viewport = document.getElementById("viewport");
+    const loader = document.getElementById("loading-overlay");
     
-    const loading = document.getElementById('loading-text');
-    if (loading) loading.innerText = "Interactive 3D View";
+    if (!viewport) return;
 
-    if (component) {
-      // 4. "Designer" Representation
-      component.addRepresentation("cartoon", {
-        color: "#2d5a45",  // Forest Green
-        aspectRatio: 3.0,
-        opacity: 0.9,
-        roughness: 1.0
+    try {
+      const NGLModule = await import('ngl');
+      const NGL = NGLModule; 
+
+      viewport.innerHTML = ""; 
+
+      const stage = new NGL.Stage("viewport", {
+        backgroundColor: "white", 
+        tooltip: false
       });
 
-      component.addRepresentation("ball+stick", {
-        sele: "ligand",
-        color: "#c4835f", // Terracotta
-        scale: 2.0
-      });
+      const handleResize = () => stage.handleResize();
+      window.addEventListener("resize", handleResize);
 
-      // 5. Center and Zoom
-      component.autoView();
+      // Load PDB Data
+      const component = await stage.loadFile("rcsb://5NRO");
 
-      // 6. Safe Animation (Built-in Spin)
-      // This is the fix: instead of a manual math loop, we use NGL's built-in spin
-      stage.setSpin(true);
+      if (component) {
+        // SUCCESS: Hide loading overlay
+        if (loader) loader.style.display = 'none';
+
+        // 1. PROTEIN: Now matches your "Action/Data" Blue
+        component.addRepresentation("cartoon", {
+          color: "#1f6f78",  // <-- PETROL BLUE (Was #2d5a45)
+          aspectRatio: 3.0,
+          opacity: 0.9,
+          roughness: 1.0
+        });
+
+        // 2. LIGAND: Now matches your "Highlight" Gold
+        component.addRepresentation("ball+stick", {
+          sele: "ligand",
+          color: "#FFD700",  // <-- KODAK GOLD (Was #c4835f)
+          scale: 2.0
+        });
+
+        component.autoView();
+        stage.setSpin(true);
+      }
+    } catch (err: any) {
+      console.error("NGL Load Error:", err);
+      const loadText = document.querySelector('#loading-overlay span');
+      if (loadText) {
+        loadText.textContent = "Error loading structure.";
+        loadText.setAttribute("style", "color: var(--accent-primary);");
+      }
     }
-  });
+  }
+
+  // Lifecycle Hooks
+  initProteinViewer();
+  document.addEventListener('astro:page-load', initProteinViewer);
 </script>
 
 <style>
+  .viewer-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+  }
+
   .protein-container {
     width: 100%;
-    height: 400px;
+    height: 100%;
     background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 0.5rem;
+    /* Border is handled by the parent figure-frame in science.astro */
+    border-radius: 4px;
     cursor: grab;
-    transition: border-color 0.3s ease;
   }
 
   .protein-container:active {
     cursor: grabbing;
-    border-color: var(--accent-primary);
   }
 
-  .protein-caption {
-    text-align: right;
-    font-size: 0.8rem;
+  .loading-state {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-surface);
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .loading-state span {
     color: var(--text-muted);
-    margin-bottom: 3rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 600px) {
+    .viewer-wrapper {
+      height: 300px;
+    }
   }
 </style>

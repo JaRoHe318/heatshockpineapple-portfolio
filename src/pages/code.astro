@@ -4,75 +4,148 @@ import BindingCurve from '../components/BindingCurve.astro';
 ---
 
 <BaseLayout 
-  title="Code & Notebooks"
+  title="Code"
   description="Analysis workflows for exploring data, fitting models, and quality control.">
   
   <section class="page-header">
-    <h1>Code & Notebooks</h1>
-    <p class="mono-meta">Python · R · Reproducibility</p>
+    <div class="header-content">
+      <span class="mono-meta section-eyebrow">Analysis & Reproducibility</span>
+      <h1 class="section-title">Code & <span class="gold">Notebooks</span></h1>
+      <p class="section-lead">
+        Interactive workflows for exploring data, fitting models, and quality control.
+      </p>
+    </div>
+    
+    <a href="https://github.com/jarohe318" class="github-button mono-meta" target="_blank" rel="noopener noreferrer">
+      <span>git checkout</span> <span class="arrow">→</span>
+    </a>
   </section>
 
-  <p style="margin-bottom: 2rem;">
-    The chart below is rendered live, representing the kind of data visualization tools I build for assay analysis.
-  </p>
+  <section class="figure-container">
+    <div class="figure-frame">
+      <BindingCurve />
+    </div>
+    <figcaption class="figure-caption mono-meta">
+      <strong class="caption-label">Fig 2</strong> — Real-time non-linear regression (4-parameter logistic).
+    </figcaption>
+  </section>
 
-  <BindingCurve />
-
-  <div class="ledger-container">
-    <h3 class="ledger-title">Key Workflows</h3>
-
-    <div class="ledger-entry">
-      <div class="entry-meta mono-meta">Jupyter · Python</div>
+  <section class="ledger-wrapper">
+    
+    <article class="ledger-entry">
+      <div class="entry-sidebar">
+        <span class="tech-primary mono-meta">Python</span>
+        <span class="status-tag">Jupyter</span>
+      </div>
       <div class="entry-content">
-        <h4>Binding curve analysis</h4>
-        <p>The logic behind the chart above. Import tabular data, clean outliers, fit dose–response curves, and validate assumptions.</p>
-        <a href="https://github.com/jarohe318" class="code-link">View Repo →</a>
-        <div class="entry-tags">
+        <div class="title-row">
+          <h2 class="entry-title">Binding Curve Analysis</h2>
+          <a href="#" class="external-link" aria-label="View Repo">↗</a>
+        </div>
+        <p class="entry-body">
+          The logic behind the chart above. Import tabular data, clean outliers, 
+          fit dose–response curves, and validate assumptions.
+        </p>
+        <div class="tag-cloud">
           <span class="tag">scipy</span>
           <span class="tag">pandas</span>
+          <span class="tag">matplotlib</span>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="ledger-entry">
-      <div class="entry-meta mono-meta">R Markdown</div>
+    <article class="ledger-entry">
+      <div class="entry-sidebar">
+        <span class="tech-primary mono-meta">R Stats</span>
+        <span class="status-tag">Markdown</span>
+      </div>
       <div class="entry-content">
-        <h4>Screening QC and diagnostics</h4>
-        <p>Automated quality control for 384-well screens. Computes plate statistics (Z-prime), flags suspect wells, and generates heatmaps for batch processing.</p>
-        <a href="https://github.com/jarohe318" class="code-link">View Repo →</a>
-        <div class="entry-tags">
+        <div class="title-row">
+          <h2 class="entry-title">Screening QC & Diagnostics</h2>
+          <a href="#" class="external-link" aria-label="View Repo">↗</a>
+        </div>
+        <p class="entry-body">
+          Automated quality control for 384-well screens. Computes plate statistics 
+          (Z-prime), flags suspect wells, and generates heatmaps for batch processing.
+        </p>
+        <div class="tag-cloud">
           <span class="tag">ggplot2</span>
           <span class="tag">tidyr</span>
+          <span class="tag">htsr</span>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="ledger-entry">
-      <div class="entry-meta mono-meta">Pipeline</div>
+    <article class="ledger-entry">
+      <div class="entry-sidebar">
+        <span class="tech-primary mono-meta">Pipeline</span>
+        <span class="status-tag">Script</span>
+      </div>
       <div class="entry-content">
-        <h4>Structural Visualization</h4>
-        <p>Scripts for rendering publication-quality protein figures and SAR analysis, integrating chemical structures with activity data.</p>
-        <a href="https://github.com/jarohe318" class="code-link">View Repo →</a>
-        <div class="entry-tags">
+        <div class="title-row">
+          <h2 class="entry-title">Structural Visualization</h2>
+          <a href="#" class="external-link" aria-label="View Repo">↗</a>
+        </div>
+        <p class="entry-body">
+          Scripts for rendering publication-quality protein figures and SAR analysis, 
+          integrating chemical structures with activity data.
+        </p>
+        <div class="tag-cloud">
           <span class="tag">ChimeraX</span>
           <span class="tag">RDKit</span>
+          <span class="tag">PyMOL</span>
         </div>
       </div>
-    </div>
-  </div>
+    </article>
+
+  </section>
 </BaseLayout>
 
 <style>
-  .ledger-container { margin-top: 4rem; max-width: 800px; }
-  .ledger-title { margin-bottom: 2rem; border-bottom: 2px solid var(--text-main); display: inline-block; }
-  .ledger-entry { display: grid; grid-template-columns: 150px 1fr; gap: 2rem; padding-bottom: 3rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border); }
-  .entry-meta { color: var(--accent-primary); text-align: right; padding-top: 0.2rem; }
-  .entry-content h4 { font-size: 1.25rem; font-family: var(--font-serif); margin-bottom: 0.75rem; color: var(--text-main); }
-  .code-link { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-primary); margin-top: 0.5rem; display: inline-block; }
-  .entry-tags { margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  /* HEADER */
+  .page-header { margin-bottom: 3rem; max-width: 900px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .section-eyebrow { color: var(--accent-primary); font-size: 0.85rem; display: block; margin-bottom: 0.5rem; }
+  .section-title { font-size: 3rem; line-height: 1.1; margin-bottom: 1rem; color: var(--text-main); }
+  .section-lead { font-size: 1.25rem; color: var(--text-muted); font-family: var(--font-serif); max-width: 35ch; }
   
-  @media (max-width: 600px) {
-    .ledger-entry { grid-template-columns: 1fr; gap: 0.5rem; }
-    .entry-meta { text-align: left; }
+  .github-button { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--accent-primary); border: 1px solid var(--border); padding: 0.6rem 1rem; border-radius: 4px; font-size: 0.85rem; transition: all 0.2s ease; margin-bottom: 1rem; }
+  .github-button:hover { border-color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary), transparent 95%); }
+
+  /* FIGURE HERO */
+  .figure-container { margin-bottom: 5rem; position: relative; }
+  .figure-frame { border: 1px solid var(--border); padding: 1.5rem; background: var(--bg-surface); border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .figure-caption { margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted); text-align: right; display: block; border-top: 1px solid var(--border); padding-top: 0.5rem; }
+  .caption-label { color: var(--accent-primary); font-weight: 700; }
+
+  /* LEDGER */
+  .ledger-wrapper { display: flex; flex-direction: column; gap: 4rem; max-width: 900px; }
+  .ledger-entry { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; align-items: flex-start; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
+  .ledger-entry:last-child { border-bottom: none; }
+
+  /* SIDEBAR */
+  .entry-sidebar { text-align: right; display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.35rem; border-right: 2px solid var(--accent-secondary); padding-right: 1.5rem; }
+  .tech-primary { font-size: 0.9rem; color: var(--text-main); font-weight: 500; }
+  .status-tag { font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-primary); opacity: 0.8; }
+
+  /* CONTENT */
+  .title-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; }
+  .entry-title { font-size: 1.5rem; color: var(--text-main); letter-spacing: -0.01em; margin: 0; }
+  .external-link { font-family: var(--font-mono); text-decoration: none; color: var(--accent-secondary); font-size: 1.25rem; line-height: 1; }
+  .external-link:hover { color: var(--accent-primary); }
+  .entry-body { font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; max-width: 60ch; }
+
+  /* TAGS */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary), transparent 92%); padding: 0.25rem 0.6rem; border-radius: 4px; border: 1px solid transparent; transition: all 0.2s ease; }
+  .tag:hover { border-color: var(--accent-primary); background: transparent; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .page-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .github-button { width: 100%; justify-content: center; }
+    .section-title { font-size: 2.5rem; }
+    .ledger-entry { grid-template-columns: 1fr; gap: 0.5rem; padding-bottom: 3rem; margin-bottom: 1rem; }
+    .entry-sidebar { flex-direction: row; text-align: left; align-items: center; gap: 0.75rem; padding-top: 0; border-right: none; border-left: 2px solid var(--accent-secondary); padding-right: 0; padding-left: 0.75rem; margin-bottom: 0.5rem; }
+    .entry-title { font-size: 1.35rem; margin-top: 0; }
   }
 </style>

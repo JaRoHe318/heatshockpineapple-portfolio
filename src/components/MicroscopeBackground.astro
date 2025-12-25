@@ -1,16 +1,33 @@
 <canvas id="microscope-canvas"></canvas>
 
 <script>
-  const canvas = document.getElementById('microscope-canvas') as HTMLCanvasElement | null;
+  // Variable to store the animation ID so we can stop it later
+  let animationFrameId: number | null = null;
 
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
+  function initMicroscope() {
+    const canvas = document.getElementById('microscope-canvas') as HTMLCanvasElement | null;
     
-    // FIX 1: Initialize with explicit types so TypeScript knows they are numbers
-    let width: number = window.innerWidth;
-    let height: number = window.innerHeight;
+    // Safety check: If canvas is gone, stop everything.
+    if (!canvas) {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      return;
+    }
 
-    // FIX 2: Define the Class BEFORE creating the array so we can use the type
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // CONFIGURATION: Made "More Visible" as requested
+    const config = {
+      particleCount: 50,         // Increased from 40
+      connectionDist: 160,       // Slightly longer reach
+      baseColor: { r: 45, g: 90, b: 69 }, // Jungle Green
+      particleOpacity: 0.6,      // Increased from 0.2
+      lineOpacity: 0.25          // Increased from 0.1
+    };
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
     class Particle {
       x: number;
       y: number;
@@ -21,17 +38,18 @@
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        // Slow biological drift
-        this.vx = (Math.random() - 0.5) * 0.3; 
-        this.vy = (Math.random() - 0.5) * 0.3;
-        this.size = Math.random() * 2 + 1;
+        // Velocity: Keep drift slow and biological
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        // Size: Slightly larger variation
+        this.size = Math.random() * 2.5 + 1.5;
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
 
-        // Gentle bounce off edges
+        // Bounce off edges
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
       }
@@ -40,29 +58,20 @@
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(45, 90, 69, 0.2)'; // Forest Green, very subtle
+        ctx.fillStyle = `rgba(${config.baseColor.r}, ${config.baseColor.g}, ${config.baseColor.b}, ${config.particleOpacity})`;
         ctx.fill();
       }
     }
 
-    // FIX 3: Explicitly say this is an array of Particle objects
     const particles: Particle[] = [];
-    const particleCount = 40;
-    const connectionDistance = 150;
 
     const resize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-    };
-
-    const init = () => {
-      resize();
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
+      if (canvas) {
+        canvas.width = width;
+        canvas.height = height;
       }
-      animate();
     };
 
     const animate = () => {
@@ -73,17 +82,18 @@
         p.update();
         p.draw();
 
-        // Draw connections (The "Network" effect)
+        // Draw Connections
         for (let j = index + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < connectionDistance) {
+          if (dist < config.connectionDist) {
             ctx.beginPath();
-            // Alpha fades based on distance
-            ctx.strokeStyle = `rgba(45, 90, 69, ${0.1 - dist/connectionDistance * 0.1})`;
+            // Opacity fades based on distance
+            const alpha = config.lineOpacity - (dist / config.connectionDist) * config.lineOpacity;
+            ctx.strokeStyle = `rgba(${config.baseColor.r}, ${config.baseColor.g}, ${config.baseColor.b}, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
@@ -92,12 +102,28 @@
         }
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
+    // Initialize
+    resize();
+    // Reset particles on init so they don't pile up if function runs twice
+    particles.length = 0; 
+    for (let i = 0; i < config.particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    // Cancel any existing loop before starting a new one
+    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    animate();
+
+    // Listen for resize
     window.addEventListener('resize', resize);
-    init();
   }
+
+  // LIFECYCLE HOOK
+  // Runs on initial load AND every navigation
+  document.addEventListener('astro:page-load', initMicroscope);
 </script>
 
 <style>
@@ -107,8 +133,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2; /* Behind everything */
+    
+    /* LAYERING FIX: Moved from -2 to -1 to sit WITH the glow, not behind it. */
+    z-index: -1; 
     pointer-events: none;
-    opacity: 0.6; 
+    
+    /* VISIBILITY FIX: Removed opacity cap (was 0.6) */
+    opacity: 0.4; 
   }
 </style>

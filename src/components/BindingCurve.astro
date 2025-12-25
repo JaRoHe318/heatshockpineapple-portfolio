@@ -1,82 +1,33 @@
-<div id="binding-curve-container" class="chart-container"></div>
-
-<script>
-  // Load Plotly from CDN (lightweight way to do it without big build steps)
-  import Plotly from 'plotly.js-dist-min';
-
-  // 1. Mock Data (Simulating a standard 4-parameter logistic fit)
-  const concentrations = [0.01, 0.1, 1, 10, 100, 1000, 10000]; // nM
-  const signal = [5, 8, 25, 65, 92, 98, 100]; // % Bound
-  
-  // High-res line for the fit curve
-  const xFit = [];
-  const yFit = [];
-  for (let i = -2; i < 5; i += 0.1) {
-    const x = Math.pow(10, i);
-    xFit.push(x);
-    // Simple Hill equation logic for the line
-    yFit.push(100 / (1 + Math.pow(10, (1 - i)))); 
-  }
-
-  // 2. Define Traces
-  const rawData = {
-    x: concentrations,
-    y: signal,
-    mode: 'markers',
-    type: 'scatter',
-    name: 'Raw Data',
-    marker: { color: '#2d5a45', size: 10, opacity: 0.8 } // Your Forest Green
-  };
-
-  const fitLine = {
-    x: xFit,
-    y: yFit,
-    mode: 'lines',
-    type: 'scatter',
-    name: 'Fit (IC50 = 10nM)',
-    line: { color: '#c4835f', width: 3 } // Your Accent Terracotta
-  };
-
-  // 3. Layout Styling (Editorial Style)
-  const layout = {
-    title: {
-      text: 'Protein Binding Isotherm',
-      font: { family: 'Iowan Old Style, serif', size: 18, color: '#2a2621' }
-    },
-    xaxis: {
-      type: 'log',
-      title: '[Ligand] (nM)',
-      gridcolor: '#e6e2dd', // Matches var(--border)
-      zerolinecolor: '#e6e2dd'
-    },
-    yaxis: {
-      title: '% Bound',
-      range: [0, 110],
-      gridcolor: '#e6e2dd',
-      zerolinecolor: '#e6e2dd'
-    },
-    paper_bgcolor: 'rgba(0,0,0,0)', // Transparent background
-    plot_bgcolor: 'rgba(0,0,0,0)',
-    showlegend: false,
-    margin: { t: 40, r: 20, b: 40, l: 50 },
-    font: { family: '-apple-system, sans-serif', color: '#4a4540' },
-    dragmode: false // Keep it static-ish
-  };
-
-  const config = { displayModeBar: false, responsive: true };
-
-  Plotly.newPlot('binding-curve-container', [fitLine, rawData], layout, config);
-</script>
+<div class="iframe-container">
+  <iframe 
+    src="/chart-frame.html" 
+    title="Binding Curve Figure"
+    loading="eager"
+  ></iframe>
+</div>
 
 <style>
-  .chart-container {
+  .iframe-container {
     width: 100%;
-    height: 350px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    height: 400px;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+    
+    /* Optional: Fade in to hide the split-second load */
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    /* This ensures the scrollbars don't appear momentarily */
+    overflow: hidden; 
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 </style>

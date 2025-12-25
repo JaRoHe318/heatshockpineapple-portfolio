@@ -8,114 +8,268 @@ import ProteinViewer from '../components/ProteinViewer.astro';
   description="Projects combining protein biochemistry, assay development, and computational analysis.">
   
   <section class="page-header">
-    <h1>Science</h1>
-    <p class="mono-meta">Assay Development · HTS · Protein Design</p>
+    <span class="mono-meta section-eyebrow">Methodology & Research</span>
+    <h1 class="section-title">Scientific <span class="gold">Ledger</span></h1>
+    <p class="section-lead">
+      Applying computational structure prediction to guide wet-lab assay development.
+    </p>
   </section>
 
-  <ProteinViewer />
+  <section class="figure-container">
+    <div class="figure-frame">
+      <ProteinViewer />
+    </div>
+    <figcaption class="figure-caption mono-meta">
+      <strong class="caption-label">Fig 1</strong> — Hsp70 (PDB: 5NRO) Interactive Visualization.
+    </figcaption>
+  </section>
 
-  <div class="ledger-container">
-    <h3 class="ledger-title">Research Projects</h3>
+  <section class="ledger-wrapper">
     
-    <div class="ledger-entry">
-      <div class="entry-meta mono-meta">2025 · Structure</div>
+    <article class="ledger-entry">
+      <div class="entry-sidebar">
+        <time class="mono-meta">2025</time>
+        <span class="status-tag">Structure</span>
+      </div>
       <div class="entry-content">
-        <h4>Peptide–protein interaction optimization</h4>
-        <p>
-          Led computational–experimental optimization of protein-binding peptides. 
-          Achieved multi-fold affinity improvements (30 nM to 5 nM) using <strong>AlphaFold 3</strong> to guide design. 
-          Validated hits using site-directed mutagenesis and fluorescence assays.
+        <h2 class="entry-title">Peptide–Protein Interaction Optimization</h2>
+        <p class="entry-body">
+          Led the computational–experimental optimization of protein-binding peptides. 
+          By integrating <strong>AlphaFold 3</strong> predictions with fluorescence polarization (FP) assays, 
+          we achieved a multi-fold affinity improvement (30 nM to 5 nM).
         </p>
-        <div class="entry-tags">
+        <div class="tag-cloud">
           <span class="tag">AlphaFold 3</span>
-          <span class="tag">SAR</span>
-          <span class="tag">FP / MST</span>
+          <span class="tag">PyMOL</span>
+          <span class="tag">Fluorescence Polarization</span>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="ledger-entry">
-      <div class="entry-meta mono-meta">Submitted · Manuscript</div>
+    <article class="ledger-entry">
+      <div class="entry-sidebar">
+        <time class="mono-meta">Submitted</time>
+        <span class="status-tag">Manuscript</span>
+      </div>
       <div class="entry-content">
-        <h4>Assay development for multi-protein systems</h4>
-        <p>
-          Managed an HTS campaign of 1,857 compounds targeting the HscA/HscB/IscU chaperone system.
-          Designed the 384-well protocol using <strong>BioTek EL406</strong> bulk dispensing automation.
+        <h2 class="entry-title">High-Throughput Assay for Multi-Protein Systems</h2>
+        <p class="entry-body">
+          Developed a 384-well HTS protocol targeting the HscA/HscB/IscU chaperone system. 
+          Validated the workflow using <strong>BioTek EL406</strong> automation and implemented 
+          a custom Python pipeline for Z-factor quality control (Z' > 0.7).
         </p>
-        <div class="entry-tags">
-          <span class="tag">384-well HTS</span>
-          <span class="tag">BioTek EL406</span>
+        <div class="tag-cloud">
+          <span class="tag">Assay Dev</span>
+          <span class="tag">Automation</span>
           <span class="tag">Python QC</span>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="ledger-entry">
-      <div class="entry-meta mono-meta">2025 · Cell Chem Bio</div>
+    <article class="ledger-entry">
+      <div class="entry-sidebar">
+        <time class="mono-meta">2025</time>
+        <span class="status-tag">Cell Chem Bio</span>
+      </div>
       <div class="entry-content">
-        <h4>Validating computationally designed proteins</h4>
-        <p>
-          Characterized binding and stability of de novo designed protein mimics. 
-          Bridged structural predictions with experimental validation and documented protocols for reproducibility.
+        <h2 class="entry-title">Validating De Novo Designed Proteins</h2>
+        <p class="entry-body">
+          Characterized the binding thermodynamics and thermal stability of computationally 
+          designed protein mimics. Bridged in silico Rosetta predictions with experimental 
+          CD spectroscopy and MST validation.
         </p>
-        <div class="entry-tags">
+        <div class="tag-cloud">
           <span class="tag">Biophysics</span>
           <span class="tag">Design Validation</span>
+          <span class="tag">Rosetta</span>
         </div>
       </div>
-    </div>
+    </article>
 
-  </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .ledger-container {
-    margin-top: 4rem;
+  /* === HEADER === */
+  .page-header {
+    margin-bottom: 3rem;
     max-width: 800px;
   }
-  
-  .ledger-title {
-    margin-bottom: 2rem;
-    border-bottom: 2px solid var(--text-main);
-    display: inline-block;
+
+  .section-eyebrow {
+    color: var(--accent-primary); /* Petrol Blue */
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+  }
+
+  .section-lead {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-family: var(--font-serif);
+    max-width: 35ch;
+  }
+
+  /* === FIGURE HERO === */
+  .figure-container {
+    margin-bottom: 5rem;
+    position: relative;
+  }
+
+  .figure-frame {
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    background: var(--bg-surface);
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  }
+
+  .figure-caption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: right;
+    display: block;
+    border-top: 1px solid var(--border);
+    padding-top: 0.5rem;
+  }
+
+  .caption-label {
+    color: var(--accent-primary); 
+    font-weight: 700;
+  }
+
+  /* === LEDGER LIST === */
+  .ledger-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 900px; 
   }
 
   .ledger-entry {
     display: grid;
-    grid-template-columns: 150px 1fr;
+    /* Grid gap handles the spacing between sidebar and content */
+    grid-template-columns: 140px 1fr; 
     gap: 2rem;
-    padding-bottom: 3rem;
-    margin-bottom: 3rem;
+    align-items: flex-start;
+    padding-bottom: 4rem;
     border-bottom: 1px solid var(--border);
   }
 
-  .entry-meta {
-    color: var(--accent-primary);
-    text-align: right;
-    padding-top: 0.2rem;
+  .ledger-entry:last-child {
+    border-bottom: none;
   }
 
-  .entry-content h4 {
-    font-size: 1.25rem;
-    font-family: var(--font-serif);
+  /* SIDEBAR (Date & Status) - DESKTOP DEFAULT */
+  .entry-sidebar {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 0.35rem;
+    
+    /* THE FIX: Desktop Gold Border */
+    /* Uses --accent-secondary (Brand Gold) */
+    border-right: 2px solid var(--accent-secondary);
+    padding-right: 1.5rem; 
+  }
+
+  .entry-sidebar time {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    font-weight: 500;
+  }
+
+  .status-tag {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    opacity: 0.8;
+  }
+
+  /* CONTENT */
+  .entry-title {
+    font-size: 1.5rem;
     margin-bottom: 0.75rem;
     color: var(--text-main);
+    letter-spacing: -0.01em;
   }
 
-  .entry-tags {
-    margin-top: 1rem;
+  .entry-body {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 60ch;
+  }
+
+  .entry-body strong {
+    color: var(--text-main);
+    font-weight: 600;
+  }
+
+  /* TAGS */
+  .tag-cloud {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
 
-  @media (max-width: 600px) {
+  .tag {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--accent-primary), transparent 92%);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    border-color: var(--accent-primary);
+    background: transparent;
+  }
+
+  /* === MOBILE === */
+  @media (max-width: 768px) {
+    .section-title { font-size: 2.5rem; }
+    
     .ledger-entry {
       grid-template-columns: 1fr;
       gap: 0.5rem;
+      padding-bottom: 3rem;
+      margin-bottom: 1rem;
     }
-    .entry-meta {
+
+    .entry-sidebar {
+      flex-direction: row;
       text-align: left;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 0;
+      
+      /* THE MOBILE FLIP */
+      border-right: none; /* Turn off desktop border */
+      padding-right: 0;
+      
+      border-left: 2px solid var(--accent-secondary); /* Turn on mobile border */
+      padding-left: 0.75rem;
+      
+      margin-bottom: 0.5rem;
+    }
+
+    .entry-title {
+      font-size: 1.35rem;
+      margin-top: 0;
     }
   }
 </style>

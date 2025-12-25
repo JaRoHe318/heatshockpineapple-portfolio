@@ -37,8 +37,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <style>
   .resources-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    /* Change 300px to 280px to be safe on all phones */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 2rem;
     margin-top: 3rem;
   }
   
