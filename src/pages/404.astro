@@ -3,50 +3,60 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Page Not Found" description="404 Error">
-  <section class="error-container">
-    
-    <img 
-      src="/android-chrome-512x512.png" 
-      alt="Chill Pineapple" 
-      class="error-mascot" 
-    />
+  <main class="error-wrapper">
+    <section class="error-container">
+      
+      <img 
+        src="/android-chrome-512x512.png" 
+        alt="Chill Pineapple" 
+        class="error-mascot" 
+      />
 
-    <div class="denature-effect">
-      <h1>404</h1>
-      <div class="denature-sub">Signal Lost</div>
-    </div>
-    
-    <p class="error-text">
-      The page you are looking for has denatured. <br />
-      The link may be broken, or the content has unfolded into nonsense.
-    </p>
-    
-    <a href="/" class="back-link">Refold (Return Home)</a>
-  </section>
+      <div class="denature-effect">
+        <h1>404</h1>
+        <div class="denature-sub">Signal Lost</div>
+      </div>
+      
+      <p class="error-text">
+        The page you are looking for has denatured.
+        <br />
+        The link may be broken, or the content has unfolded into nonsense.
+      </p>
+      
+      <a href="/" class="back-link">Refold (Return Home)</a>
+    </section>
+  </main>
 </BaseLayout>
 
 <style>
+  /* Wrapper to center it vertically/horizontally on the full page */
+  .error-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* Takes up most of the screen */
+    padding: 2rem;
+  }
+
   .error-container {
-    min-height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
-    padding-top: 2rem;
+    max-width: 600px;
   }
 
-  /* NEW: Mascot Styling */
+  /* Mascot Styling */
   .error-mascot {
-    width: 180px; /* Big enough to be seen, small enough to not dominate */
+    width: 150px;
     height: auto;
     margin-bottom: 2rem;
-    /* A slow, chill float animation */
     animation: float 6s ease-in-out infinite;
+    /* Subtle shadow to separate it from bg */
     filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
   }
 
-  /* The Heat Shock Animation (Existing) */
+  /* The Heat Shock Animation */
   .denature-effect h1 {
     font-size: 6rem;
     font-family: var(--font-mono);
@@ -73,14 +83,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-top: 2rem;
     margin-bottom: 2.5rem;
     font-size: 1.1rem;
-    color: var(--text-body);
+    /* FIXED: Updated to match your global variable */
+    color: var(--text-main); 
+    line-height: 1.6;
   }
 
   .back-link {
+    display: inline-block;
     font-family: var(--font-mono);
+    text-decoration: none;
     padding: 0.8rem 1.5rem;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
+    /* FIXED: Updated to match your global variable */
+    border: 1px solid var(--border); 
+    color: var(--text-main);
+    border-radius: 4px;
     transition: all 0.2s ease;
   }
 
@@ -88,6 +104,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-color: var(--accent-primary);
     background: var(--bg-surface);
     color: var(--accent-primary);
+    transform: translateY(-2px);
   }
 
   @keyframes heatshock {
@@ -105,7 +122,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 
-  /* NEW: The Floating Animation */
   @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-15px); }
