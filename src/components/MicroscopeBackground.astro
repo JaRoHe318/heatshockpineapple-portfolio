@@ -6,7 +6,6 @@
 
   function initMicroscope() {
     const canvas = document.getElementById('microscope-canvas') as HTMLCanvasElement | null;
-    
     // Safety check: If canvas is gone, stop everything.
     if (!canvas) {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -16,13 +15,13 @@
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // CONFIGURATION: Made "More Visible" as requested
+    // CONFIGURATION: Adjusted for transparency/subtlety
     const config = {
-      particleCount: 50,         // Increased from 40
-      connectionDist: 160,       // Slightly longer reach
+      particleCount: 40,         // Reduced count slightly for cleaner look
+      connectionDist: 150,       
       baseColor: { r: 45, g: 90, b: 69 }, // Jungle Green
-      particleOpacity: 0.6,      // Increased from 0.2
-      lineOpacity: 0.25          // Increased from 0.1
+      particleOpacity: 0.3,      // Reduced from 0.6 to 0.3
+      lineOpacity: 0.1           // Reduced from 0.25 to 0.1
     };
 
     let width = window.innerWidth;
@@ -41,7 +40,7 @@
         // Velocity: Keep drift slow and biological
         this.vx = (Math.random() - 0.5) * 0.4;
         this.vy = (Math.random() - 0.5) * 0.4;
-        // Size: Slightly larger variation
+        // Size: Random variation
         this.size = Math.random() * 2.5 + 1.5;
       }
 
@@ -101,14 +100,13 @@
           }
         }
       });
-
       animationFrameId = requestAnimationFrame(animate);
     };
 
     // Initialize
     resize();
     // Reset particles on init so they don't pile up if function runs twice
-    particles.length = 0; 
+    particles.length = 0;
     for (let i = 0; i < config.particleCount; i++) {
       particles.push(new Particle());
     }
@@ -133,12 +131,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    
-    /* LAYERING FIX: Moved from -2 to -1 to sit WITH the glow, not behind it. */
+    /* Layering: -1 puts it behind content */
     z-index: -1; 
     pointer-events: none;
     
-    /* VISIBILITY FIX: Removed opacity cap (was 0.6) */
-    opacity: 0.4; 
+    /* VISIBILITY: Reduced global opacity for a "barely there" look */
+    opacity: 0.2;
   }
 </style>

@@ -3,12 +3,11 @@
 const currentYear = new Date().getFullYear();
 
 // DNA K Sequence (Portfolio Unique Feature)
-// We strip metadata and whitespace to get a clean string
 const dnaKRaw = `5NRO DNAK AA:MGKIIGIDLGTTNSCVAIMDGTTPRVLENAEGDRTTPSIIAYTQDGCTLVGQPAKRQAVTNPQNTLFAIKRLIGRRFQDE`;
 const dnaK = dnaKRaw.replace(/AA:|\s+/g, "");
 
 // Repeat it 3 times for the seamless loop effect
-const tape = `${dnaK}   ${dnaK}   ${dnaK}`; 
+const tape = `${dnaK}   ${dnaK}   ${dnaK}`;
 ---
 
 <footer class="site-footer site-footer--dna">
@@ -53,7 +52,7 @@ const tape = `${dnaK}   ${dnaK}   ${dnaK}`;
   .footer-inner {
     width: 100%;
     /* MATCHES HEADER: Keeps alignment consistent */
-    max-width: 1600px; 
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 2rem;
     
@@ -130,7 +129,10 @@ const tape = `${dnaK}   ${dnaK}   ${dnaK}`;
     width: 100%;
     background: rgba(0, 0, 0, 0.20); /* Darker track */
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 0.6rem 0;
+    
+    /* THE FIX: Reduced padding from 0.6rem to 0.25rem */
+    padding: 0.25rem 0; 
+    
     margin-bottom: 2rem;
     user-select: none;
   }
@@ -143,7 +145,6 @@ const tape = `${dnaK}   ${dnaK}   ${dnaK}`;
     color: var(--brand-secondary); /* Gold Letters */
     opacity: 0.85;
     display: inline-block;
-    
     /* Animation: Slow infinite loop */
     animation: footer-scroll 120s linear infinite;
   }

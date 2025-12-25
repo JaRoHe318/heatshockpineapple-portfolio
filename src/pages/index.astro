@@ -40,9 +40,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="orbit-ring"></div>
       </div>
       
-      <div class="status-badge mono-meta">
+      <a 
+        href="https://www.linkedin.com/in/jrh318" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="status-badge mono-meta"
+      >
         <span class="status-dot"></span> Open for collaboration
-      </div>
+      </a>
 
       <div class="quote-card">
         <p>“Nearly everything is really interesting if you go into it deeply enough.”</p>
@@ -57,9 +62,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   /* === LAYOUT === */
   .hero-wrapper {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr; /* Slightly wider text col */
+    grid-template-columns: 1.1fr 0.9fr; 
     gap: 4rem;
-    align-items: center; /* Vertically center everything */
+    align-items: center;
     min-height: 70vh;
     padding-top: 1rem;
   }
@@ -81,10 +86,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .role-title {
     font-size: 1rem;
-    color: var(--accent-primary); /* Now Green */
+    color: var(--accent-primary);
     display: inline-block;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent-secondary); /* Gold Underline */
+    border-bottom: 2px solid var(--accent-secondary);
   }
 
   .lead-text {
@@ -96,7 +101,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .highlight {
-    /* Subtle green highlight */
     background: linear-gradient(to bottom, transparent 65%, rgba(45, 90, 69, 0.1) 65%);
     color: inherit;
   }
@@ -127,12 +131,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .btn-primary {
-    background: var(--accent-primary); /* Green */
+    background: var(--accent-primary);
     color: #ffffff;
     border: 1px solid var(--accent-primary);
   }
   .btn-primary:hover {
-    background: var(--text-main); /* Dark on hover */
+    background: var(--text-main);
     border-color: var(--text-main);
     transform: translateY(-1px);
   }
@@ -172,18 +176,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 50%;
     object-fit: cover;
     z-index: 2;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(0,0,0,0.1); 
   }
 
   .orbit-ring {
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 1px dashed var(--border);
+    /* Petrol Blue Ring, Visible */
+    border: 1px dashed var(--accent-primary);
+    opacity: 0.7; 
+    
     border-radius: 50%;
     z-index: 1;
     animation: spin 60s linear infinite;
-    opacity: 0.5;
   }
 
   .status-badge {
@@ -193,13 +199,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 0.75rem;
     color: var(--text-muted);
     margin-bottom: 2rem;
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid transparent; 
+    transition: all 0.2s ease;
+  }
+
+  .status-badge:hover {
+    background: var(--bg-surface);
+    border-color: var(--border);
+    color: var(--text-main);
+    transform: translateY(-1px);
   }
 
   .status-dot {
     width: 8px;
     height: 8px;
-    background-color: var(--accent-secondary); /* Gold */
+    background-color: var(--accent-secondary);
     border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
   }
 
   /* QUOTE CARD */
@@ -237,13 +256,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     .text-content {
-      order: 1; 
+      order: 1;
       gap: 2rem;
     }
 
     .visual-content {
       order: 2;
-      border-top: 1px solid var(--border); /* Divider */
+      border-top: 1px solid var(--border);
       padding-top: 3rem;
       width: 100%;
     }
