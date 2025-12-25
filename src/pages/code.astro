@@ -4,148 +4,300 @@ import BindingCurve from '../components/BindingCurve.astro';
 ---
 
 <BaseLayout 
-  title="Code"
+  title="Analysis"
   description="Analysis workflows for exploring data, fitting models, and quality control.">
   
-  <section class="page-header">
-    <div class="header-content">
-      <span class="mono-meta section-eyebrow">Analysis & Reproducibility</span>
-      <h1 class="section-title">Code & <span class="gold">Notebooks</span></h1>
-      <p class="section-lead">
-        Interactive workflows for exploring data, fitting models, and quality control.
-      </p>
+  <main>
+    <div class="page-header">
+      <div class="header-text">
+        <h1>Analysis</h1>
+        <p class="subtitle">Quantitative modeling and reproducibility workflows.</p>
+      </div>
+      
+      <a href="https://github.com/jarohe318" class="github-button mono-meta" target="_blank" rel="noopener noreferrer">
+        <span>GitHub</span> <span class="arrow">→</span>
+      </a>
     </div>
-    
-    <a href="https://github.com/jarohe318" class="github-button mono-meta" target="_blank" rel="noopener noreferrer">
-      <span>git checkout</span> <span class="arrow">→</span>
-    </a>
-  </section>
 
-  <section class="figure-container">
-    <div class="figure-frame">
-      <BindingCurve />
-    </div>
-    <figcaption class="figure-caption mono-meta">
-      <strong class="caption-label">Fig 2</strong> — Real-time non-linear regression (4-parameter logistic).
-    </figcaption>
-  </section>
+    <section class="figure-container">
+      <div class="figure-frame">
+        <BindingCurve />
+      </div>
+      <figcaption class="figure-caption mono-meta">
+        <strong class="caption-label">Figure 2</strong> — Real-time non-linear regression. 
+        Raw data (black) fitted to a 4-parameter logistic model (metallic gold).
+      </figcaption>
+    </section>
 
-  <section class="ledger-wrapper">
-    
-    <article class="ledger-entry">
-      <div class="entry-sidebar">
-        <span class="tech-primary mono-meta">Python</span>
-        <span class="status-tag">Jupyter</span>
-      </div>
-      <div class="entry-content">
-        <div class="title-row">
-          <h2 class="entry-title">Binding Curve Analysis</h2>
-          <a href="#" class="external-link" aria-label="View Repo">↗</a>
+    <section class="ledger-wrapper">
+      
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
+          <span class="tech-primary mono-meta">Python</span>
+          <span class="status-tag">Jupyter</span>
         </div>
-        <p class="entry-body">
-          The logic behind the chart above. Import tabular data, clean outliers, 
-          fit dose–response curves, and validate assumptions.
-        </p>
-        <div class="tag-cloud">
-          <span class="tag">scipy</span>
-          <span class="tag">pandas</span>
-          <span class="tag">matplotlib</span>
+        <div class="entry-content">
+          <div class="title-row">
+            <h2 class="entry-title">Binding Curve Analysis</h2>
+            <a href="#" class="external-link" aria-label="View Repo">↗</a>
+          </div>
+          <p class="entry-body">
+            The logic behind the chart above. A reusable pipeline to import tabular data, 
+            flag outliers using Z-score thresholds, fit dose–response curves, and validate 
+            Hill slope assumptions.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">scipy</span>
+            <span class="tag">pandas</span>
+            <span class="tag">matplotlib</span>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
 
-    <article class="ledger-entry">
-      <div class="entry-sidebar">
-        <span class="tech-primary mono-meta">R Stats</span>
-        <span class="status-tag">Markdown</span>
-      </div>
-      <div class="entry-content">
-        <div class="title-row">
-          <h2 class="entry-title">Screening QC & Diagnostics</h2>
-          <a href="#" class="external-link" aria-label="View Repo">↗</a>
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
+          <span class="tech-primary mono-meta">R Stats</span>
+          <span class="status-tag">Markdown</span>
         </div>
-        <p class="entry-body">
-          Automated quality control for 384-well screens. Computes plate statistics 
-          (Z-prime), flags suspect wells, and generates heatmaps for batch processing.
-        </p>
-        <div class="tag-cloud">
-          <span class="tag">ggplot2</span>
-          <span class="tag">tidyr</span>
-          <span class="tag">htsr</span>
+        <div class="entry-content">
+          <div class="title-row">
+            <h2 class="entry-title">Screening QC & Diagnostics</h2>
+            <a href="#" class="external-link" aria-label="View Repo">↗</a>
+          </div>
+          <p class="entry-body">
+            Automated quality control for 384-well HTS screens. Computes plate statistics 
+            (Z-prime, SSMD), visualizes edge effects, and generates interactive heatmaps 
+            for batch processing validation.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">ggplot2</span>
+            <span class="tag">tidyr</span>
+            <span class="tag">htsr</span>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
 
-    <article class="ledger-entry">
-      <div class="entry-sidebar">
-        <span class="tech-primary mono-meta">Pipeline</span>
-        <span class="status-tag">Script</span>
-      </div>
-      <div class="entry-content">
-        <div class="title-row">
-          <h2 class="entry-title">Structural Visualization</h2>
-          <a href="#" class="external-link" aria-label="View Repo">↗</a>
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
+          <span class="tech-primary mono-meta">Pipeline</span>
+          <span class="status-tag">Script</span>
         </div>
-        <p class="entry-body">
-          Scripts for rendering publication-quality protein figures and SAR analysis, 
-          integrating chemical structures with activity data.
-        </p>
-        <div class="tag-cloud">
-          <span class="tag">ChimeraX</span>
-          <span class="tag">RDKit</span>
-          <span class="tag">PyMOL</span>
+        <div class="entry-content">
+          <div class="title-row">
+            <h2 class="entry-title">Structural Visualization</h2>
+            <a href="#" class="external-link" aria-label="View Repo">↗</a>
+          </div>
+          <p class="entry-body">
+            Command-line workflows for rendering publication-quality protein figures. 
+            Automates the mapping of SAR activity data onto 3D surfaces to visualize 
+            binding pockets.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">ChimeraX</span>
+            <span class="tag">RDKit</span>
+            <span class="tag">PyMOL</span>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
 
-  </section>
+    </section>
+  </main>
 </BaseLayout>
 
 <style>
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
   /* HEADER */
-  .page-header { margin-bottom: 3rem; max-width: 900px; display: flex; justify-content: space-between; align-items: flex-end; }
-  .section-eyebrow { color: var(--accent-primary); font-size: 0.85rem; display: block; margin-bottom: 0.5rem; }
-  .section-title { font-size: 3rem; line-height: 1.1; margin-bottom: 1rem; color: var(--text-main); }
-  .section-lead { font-size: 1.25rem; color: var(--text-muted); font-family: var(--font-serif); max-width: 35ch; }
+  .page-header {
+    margin-bottom: 4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-main); /* Night Mode Safe */
+    margin: 0;
+    letter-spacing: -0.05rem;
+  }
+
+  .subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    font-weight: 400;
+  }
   
-  .github-button { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--accent-primary); border: 1px solid var(--border); padding: 0.6rem 1rem; border-radius: 4px; font-size: 0.85rem; transition: all 0.2s ease; margin-bottom: 1rem; }
-  .github-button:hover { border-color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary), transparent 95%); }
+  .github-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
+  }
+  
+  .github-button:hover {
+    border-color: var(--text-main);
+    background: var(--bg-surface);
+  }
 
   /* FIGURE HERO */
-  .figure-container { margin-bottom: 5rem; position: relative; }
-  .figure-frame { border: 1px solid var(--border); padding: 1.5rem; background: var(--bg-surface); border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
-  .figure-caption { margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-muted); text-align: right; display: block; border-top: 1px solid var(--border); padding-top: 0.5rem; }
-  .caption-label { color: var(--accent-primary); font-weight: 700; }
+  .figure-container {
+    margin-bottom: 5rem;
+  }
+
+  .figure-frame {
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    background: var(--bg-surface);
+    border-radius: 4px;
+  }
+
+  .figure-caption {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+  }
+
+  .caption-label {
+    color: var(--text-main);
+    font-weight: 600;
+  }
 
   /* LEDGER */
-  .ledger-wrapper { display: flex; flex-direction: column; gap: 4rem; max-width: 900px; }
-  .ledger-entry { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; align-items: flex-start; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
-  .ledger-entry:last-child { border-bottom: none; }
+  .ledger-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
 
-  /* SIDEBAR */
-  .entry-sidebar { text-align: right; display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.35rem; border-right: 2px solid var(--accent-secondary); padding-right: 1.5rem; }
-  .tech-primary { font-size: 0.9rem; color: var(--text-main); font-weight: 500; }
-  .status-tag { font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-primary); opacity: 0.8; }
+  .ledger-entry {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  /* SIDEBAR: NOW UNIFIED WITH PETROL BLUE */
+  .entry-sidebar {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 0.35rem;
+    /* FIX: Use Primary Brand Color (Petrol) instead of Gold */
+    border-right: 2px solid var(--accent-primary);
+    padding-right: 1.5rem;
+  }
+
+  .tech-primary {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    font-weight: 500;
+  }
+
+  .status-tag {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    /* FIX: High contrast Petrol Blue */
+    color: var(--accent-primary);
+    opacity: 0.9;
+  }
 
   /* CONTENT */
-  .title-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; }
-  .entry-title { font-size: 1.5rem; color: var(--text-main); letter-spacing: -0.01em; margin: 0; }
-  .external-link { font-family: var(--font-mono); text-decoration: none; color: var(--accent-secondary); font-size: 1.25rem; line-height: 1; }
-  .external-link:hover { color: var(--accent-primary); }
-  .entry-body { font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; max-width: 60ch; }
+  .title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+  }
+
+  .entry-title {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .external-link {
+    font-family: var(--font-mono);
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  
+  .external-link:hover {
+    color: var(--accent-primary); /* Hover becomes Petrol */
+  }
+
+  .entry-body {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
 
   /* TAGS */
-  .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .tag { font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary), transparent 92%); padding: 0.25rem 0.6rem; border-radius: 4px; border: 1px solid transparent; transition: all 0.2s ease; }
-  .tag:hover { border-color: var(--accent-primary); background: transparent; }
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    /* FIX: Petrol Blue Tags (Consistent with Science Page) */
+    color: var(--accent-primary);
+    background: color-mix(in srgb, var(--accent-primary), transparent 92%);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    border-color: var(--accent-primary);
+    background: transparent;
+  }
 
   /* MOBILE */
   @media (max-width: 768px) {
     .page-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    .github-button { width: 100%; justify-content: center; }
-    .section-title { font-size: 2.5rem; }
-    .ledger-entry { grid-template-columns: 1fr; gap: 0.5rem; padding-bottom: 3rem; margin-bottom: 1rem; }
-    .entry-sidebar { flex-direction: row; text-align: left; align-items: center; gap: 0.75rem; padding-top: 0; border-right: none; border-left: 2px solid var(--accent-secondary); padding-right: 0; padding-left: 0.75rem; margin-bottom: 0.5rem; }
-    .entry-title { font-size: 1.35rem; margin-top: 0; }
+    h1 { font-size: 2.5rem; }
+    .ledger-entry { grid-template-columns: 1fr; gap: 0.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .ledger-entry:last-child { border-bottom: none; }
+    
+    .entry-sidebar { 
+      flex-direction: row; 
+      text-align: left; 
+      align-items: center; 
+      gap: 0.75rem; 
+      padding-top: 0; 
+      border-right: none; 
+      /* Unified Mobile Border */
+      border-left: 2px solid var(--accent-primary); 
+      padding-left: 0.75rem; 
+      padding-right: 0;
+      margin-bottom: 0.5rem; 
+    }
   }
 </style>

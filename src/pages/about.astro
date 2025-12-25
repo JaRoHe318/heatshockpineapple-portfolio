@@ -6,44 +6,240 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="About"
   description="Who I am, how I work, and the kinds of problems I like to solve.">
   
-  <section class="page-header">
-    <h1>About</h1>
-    <p class="mono-meta">Biochemist · Coder · Photographer</p>
-  </section>
+  <main>
+    <header class="page-header">
+      <h1>About</h1>
+      <p class="subtitle">Biochemist · Coder</p>
+    </header>
 
-  <img 
-    src="/images/ui/about-cover.jpg" 
-    alt="Jason Hernandez in the lab" 
-    class="section-cover" 
-  />
+    <section class="banner-container">
+      <div class="banner-frame">
+        <img 
+          src="/images/ui/about-cover.jpg" 
+          alt="Jason Hernandez in the lab" 
+          class="banner-image" 
+        />
+      </div>
+    </section>
 
-  <section class="about-content">
-    <h3>Background</h3>
-    <p>
-      I am Jason Hernandez, a biochemist who lives at the edge between wet lab work and code. 
-      Most of my recent time has gone into protein assay development, high-throughput screening, and the work of making data clean enough to trust.
-    </p>
-    <p>
-      <strong>Heat Shock Pineapple</strong> is the umbrella I use for my work in science, computation, photography, and writing. 
-      The name is a nod to the heat shock proteins I studied at UCSF—molecular chaperones that keep other proteins from falling apart when conditions get rough.
-    </p>
+    <div class="ledger-wrapper">
+      
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
+          <span class="mono-meta sidebar-label">Background</span>
+        </div>
+        <div class="entry-content">
+          <p class="narrative-text">
+            I am <strong>Jason Hernandez</strong>, a biochemist who lives at the edge between wet lab work and code. 
+            Most of my recent time has gone into protein assay development, high-throughput screening, 
+            and the work of making data clean enough to trust.
+          </p>
+          <p class="narrative-text">
+            <strong>Heat Shock Pineapple</strong> is the umbrella I use for my work in science and computation. 
+            The name is a nod to the heat shock proteins I studied at UCSF—molecular chaperones that keep 
+            other proteins from falling apart when conditions get rough.
+          </p>
+        </div>
+      </article>
 
-    <h3>How I work</h3>
-    <p>
-      I like building experiments starting from the analysis. 
-      First comes the question, then a definition of what good signal looks like. 
-      After that I design controls, plate maps, and QC metrics that make that signal obvious. 
-    </p>
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
+          <span class="mono-meta sidebar-label">Approach</span>
+        </div>
+        <div class="entry-content">
+          <p class="narrative-text">
+            I like building experiments starting from the analysis. First comes the question, 
+            then a definition of what good signal looks like. After that, I design controls, 
+            plate maps, and QC metrics that make that signal obvious.
+          </p>
+        </div>
+      </article>
 
-    <h3>Connect</h3>
-    <p>
-      If you are working on assay-heavy biology and want someone who can think in both pipettes and scripts, I am happy to talk.
-    </p>
-    <ul style="list-style: none; padding: 0; display: flex; gap: 1.5rem; flex-wrap: wrap;">
-      <li><a href="/files/Jason_Hernandez_Resume.pdf">Resume (PDF)</a></li>
-      <li><a href="mailto:jrh@heatshockpineapple.com">Email</a></li>
-      <li><a href="https://www.linkedin.com/in/jrh318">LinkedIn</a></li>
-      <li><a href="https://github.com/jarohe318">GitHub</a></li>
-    </ul>
-  </section>
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
+          <span class="mono-meta sidebar-label">Connect</span>
+        </div>
+        <div class="entry-content">
+          <p class="narrative-text">
+            If you are working on assay-heavy biology and want someone who can think in both 
+            pipettes and scripts, I am happy to talk.
+          </p>
+          
+          <div class="link-grid">
+            <a href="/files/Jason_Hernandez_Resume.pdf" class="link-card">
+              <span class="link-name">Resume (PDF)</span>
+              <span class="link-icon">↓</span>
+            </a>
+            <a href="mailto:jrh@heatshockpineapple.com" class="link-card">
+              <span class="link-name">Email</span>
+              <span class="link-icon">→</span>
+            </a>
+            <a href="https://www.linkedin.com/in/jrh318" class="link-card" target="_blank" rel="noopener noreferrer">
+              <span class="link-name">LinkedIn</span>
+              <span class="link-icon">↗</span>
+            </a>
+            <a href="https://github.com/jarohe318" class="link-card" target="_blank" rel="noopener noreferrer">
+              <span class="link-name">GitHub</span>
+              <span class="link-icon">↗</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
 </BaseLayout>
+
+<style>
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* === HEADER === */
+  .page-header {
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+    letter-spacing: -0.05rem;
+  }
+
+  .subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    font-weight: 400;
+  }
+
+  /* === BANNER (Hero Image) === */
+  .banner-container {
+    margin-bottom: 5rem;
+  }
+
+  .banner-frame {
+    border: 1px solid var(--border);
+    padding: 0.5rem;
+    background: var(--bg-surface);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .banner-image {
+    width: 100%;
+    height: 350px; /* Cinematic height */
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    filter: grayscale(100%);
+    transition: filter 0.6s ease;
+  }
+
+  .banner-frame:hover .banner-image {
+    filter: grayscale(0%);
+  }
+
+  /* === NARRATIVE LEDGER === */
+  .ledger-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .ledger-entry {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  .entry-sidebar {
+    text-align: right;
+    padding-top: 0.5rem;
+    border-right: 2px solid var(--accent-primary); /* Brand Petrol Blue */
+    padding-right: 1.5rem;
+  }
+
+  .sidebar-label {
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .narrative-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    max-width: 60ch;
+  }
+
+  .narrative-text strong {
+    color: var(--text-main);
+    font-weight: 600;
+  }
+
+  /* === LINK GRID === */
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .link-card {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    background: var(--bg-surface);
+    transition: all 0.2s ease;
+  }
+
+  .link-name {
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .link-icon {
+    color: var(--accent-primary);
+    font-family: var(--font-mono);
+  }
+
+  .link-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+  }
+
+  /* === MOBILE === */
+  @media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    
+    .banner-image { height: 250px; }
+
+    .ledger-entry {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .entry-sidebar {
+      text-align: left;
+      border-right: none;
+      border-left: 2px solid var(--accent-primary);
+      padding-right: 0;
+      padding-left: 1rem;
+    }
+  }
+</style>

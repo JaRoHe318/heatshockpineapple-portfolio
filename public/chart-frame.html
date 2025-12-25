@@ -8,7 +8,6 @@
   <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
   
   <style>
-    /* "Paper" Style: Clean white background for publication quality */
     body, html { 
       margin: 0; padding: 0; 
       width: 100%; height: 100%; 
@@ -26,15 +25,18 @@
     // --- 1. CONSTANTS ---
     const textColor = '#333333';
     const gridColor = '#e0e0e0';
-    const petrolBlue = '#1f6f78';
-    const brandGold = '#FFD700';
+    
+    // COLORS: "Publication Standard"
+    // Data is pure black (Truth). 
+    // Fit is "Metallic Gold" (Model) - Darker and thinner for elegance.
+    const dataBlack = '#000000';   
+    const metallicGold = '#a67c00'; 
     const kdValue = 5.01;
 
     // --- 2. DATA GENERATION ---
     const concentrations = [0.01, 0.1, 0.3, 1, 3, 10, 30, 100, 300, 1000];
     const signal =         [2,    5,   12,  25, 45, 75, 88,  95,  98,  100];
     
-    // Generate smooth 4PL curve
     const xFit = []; 
     const yFit = [];
     for (let i = -2; i < 3.5; i += 0.05) {
@@ -51,16 +53,12 @@
         type: 'log', 
         title: { text: '<b>[Ligand] (nM)</b>', standoff: 20 },
         tickvals: [0.01, 0.1, 1, 10, 100, 1000],
-        // FIX: Manually wrapped in <b> tags
         ticktext: ['<b>0.01</b>', '<b>0.1</b>', '<b>1</b>', '<b>10</b>', '<b>100</b>', '<b>1000</b>'],
-        
-        // Minor ticks configuration
         dtick: 1, 
         minor: { dtick: "D1", ticklen: 4, tickwidth: 1, showgrid: false },
-        
-        range: [-2, 3], // Explicit log range
+        range: [-2, 3], 
         color: textColor, gridcolor: gridColor, linecolor: textColor, mirror: true,
-        linewidth: 2, // Thicker axis line
+        linewidth: 2, 
         tickfont: { family: 'sans-serif', size: 12 },
         titlefont: { family: 'sans-serif', size: 14 }
       },
@@ -68,13 +66,10 @@
       yaxis: {
         title: { text: '<b>Bound Fraction (%)</b>', standoff: 20 },
         range: [-5, 115],
-        
-        // FIX: Manually define ticks and wrap in <b> tags to force boldness
         tickvals: [0, 25, 50, 75, 100],
         ticktext: ['<b>0</b>', '<b>25</b>', '<b>50</b>', '<b>75</b>', '<b>100</b>'],
-        
         color: textColor, gridcolor: gridColor, linecolor: textColor, mirror: true,
-        linewidth: 2, // Thicker axis line
+        linewidth: 2, 
         tickfont: { family: 'sans-serif', size: 12 },
         titlefont: { family: 'sans-serif', size: 14 }
       },
@@ -84,19 +79,19 @@
       showlegend: false,
       dragmode: false,
       
-      // ANNOTATION: Kd Marker
       shapes: [
         {
           type: 'line',
           x0: kdValue, x1: kdValue,
           y0: -5, y1: 50,
-          line: { color: '#666', width: 2, dash: 'dot' }
+          // Finer dashed line (1px) looks more precise
+          line: { color: '#666', width: 1, dash: 'dot' } 
         },
         {
           type: 'line',
           x0: 0.01, x1: kdValue,
           y0: 50, y1: 50,
-          line: { color: '#666', width: 2, dash: 'dot' }
+          line: { color: '#666', width: 1, dash: 'dot' }
         }
       ],
       annotations: [
@@ -112,15 +107,21 @@
     // --- 4. TRACES ---
     const data = [
       {
+        // LINE: Metallic Gold, Width 3 (Refined, not cartoonish)
         x: xFit, y: yFit, mode: 'lines',
         name: 'Fit',
-        line: { color: brandGold, width: 4 },
+        line: { color: metallicGold, width: 3 }, 
         hoverinfo: 'skip'
       },
       {
+        // POINTS: Black, Size 8 (Precise)
         x: concentrations, y: signal, mode: 'markers',
         name: 'Data',
-        marker: { color: petrolBlue, size: 12, line: { color: 'white', width: 1 } },
+        marker: { 
+          color: dataBlack, 
+          size: 8, // Smaller = More Professional
+          line: { color: 'white', width: 0.5 } // Tiny white halo to separate overlapping points
+        },
         hovertemplate: '<b>%{y:.1f}% Bound</b><br>at %{x} nM<extra></extra>'
       }
     ];
