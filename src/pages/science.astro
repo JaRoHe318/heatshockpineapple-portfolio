@@ -18,7 +18,10 @@ import ProteinViewer from '../components/ProteinViewer.astro';
         <ProteinViewer />
       </div>
       <figcaption class="figure-caption mono-meta">
-        <strong class="caption-label">Figure 1</strong> — Hsp70 (PDB: 5NRO) Interactive Visualization.
+        <strong class="caption-label">Figure 1. Structural Architecture of Hsp70.</strong> 
+        Interactive 3D rendering of the <em>E. coli</em> DnaK chaperone (PDB: 5NRO). 
+        Highlighting the nucleotide-binding domain (NBD) and substrate-binding domain (SBD) 
+        architecture required for allosteric regulation.
       </figcaption>
     </section>
 
@@ -32,9 +35,9 @@ import ProteinViewer from '../components/ProteinViewer.astro';
         <div class="entry-content">
           <h2 class="entry-title">Peptide–Protein Interaction Optimization</h2>
           <p class="entry-body">
-            Led the computational–experimental optimization of protein-binding peptides. 
-            By integrating <strong>AlphaFold 3</strong> predictions with fluorescence polarization (FP) assays, 
-            we achieved a multi-fold affinity improvement (30 nM to 5 nM).
+            Integrated <strong>AlphaFold 3</strong> structural predictions with fluorescence polarization (FP) 
+            assays to drive affinity maturation of protein-binding peptides. Iterative design cycles 
+            yielded a 6-fold potency increase (<em>K</em><sub>d</sub>: 30 nM &rarr; 5 nM).
           </p>
           <div class="tag-cloud">
             <span class="tag">AlphaFold 3</span>
@@ -52,9 +55,9 @@ import ProteinViewer from '../components/ProteinViewer.astro';
         <div class="entry-content">
           <h2 class="entry-title">High-Throughput Assay for Multi-Protein Systems</h2>
           <p class="entry-body">
-            Developed a 384-well HTS protocol targeting the HscA/HscB/IscU chaperone system. 
-            Validated the workflow using <strong>BioTek EL406</strong> automation and implemented 
-            a custom Python pipeline for Z-factor quality control (Z' > 0.7).
+            Engineered a 384-well high-throughput screening campaign for the HscA/HscB/IscU chaperone complex. 
+            Executed a <strong>1,857-compound pilot screen</strong> on BioTek automation, 
+            achieving a Z-factor > 0.6 and establishing protocols for hit validation.
           </p>
           <div class="tag-cloud">
             <span class="tag">Assay Dev</span>
@@ -72,14 +75,34 @@ import ProteinViewer from '../components/ProteinViewer.astro';
         <div class="entry-content">
           <h2 class="entry-title">Validating De Novo Designed Proteins</h2>
           <p class="entry-body">
-            Characterized the binding thermodynamics and thermal stability of computationally 
-            designed protein mimics. Bridged in silico Rosetta predictions with experimental 
-            CD spectroscopy and MST validation.
+            Validated computational designs through rigorous biophysical characterization. 
+            Correlated <em>in silico</em> Rosetta energy scores with experimental binding thermodynamics (MST) 
+            and thermal stability (CD) data to verify folding accuracy.
           </p>
           <div class="tag-cloud">
             <span class="tag">Biophysics</span>
             <span class="tag">Design Validation</span>
             <span class="tag">Rosetta</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
+          <time class="mono-meta">2021</time>
+          <span class="status-tag">Synthesis</span>
+        </div>
+        <div class="entry-content">
+          <h2 class="entry-title">Small Molecule Inhibitor Synthesis</h2>
+          <p class="entry-body">
+            Synthesized and purified TMEM16A channel inhibitors via multi-step organic synthesis. 
+            Characterized products via <sup>1</sup>H/<sup>13</sup>C NMR and HPLC (>95% purity), 
+            supporting structure-activity relationship (SAR) studies.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Organic Synthesis</span>
+            <span class="tag">HPLC/NMR</span>
+            <span class="tag">Medicinal Chem</span>
           </div>
         </div>
       </article>
@@ -105,7 +128,6 @@ import ProteinViewer from '../components/ProteinViewer.astro';
   h1 {
     font-size: 3rem;
     font-weight: 700;
-    /* FIX: Uses theme variable so it turns White in Night Mode */
     color: var(--text-main); 
     margin: 0;
     letter-spacing: -0.05rem;
@@ -128,8 +150,7 @@ import ProteinViewer from '../components/ProteinViewer.astro';
     padding: 0.5rem;
     background: var(--bg-surface);
     border-radius: 4px;
-    /* Adds a subtle pop in Dark Mode so the figure stands out */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
   }
 
   .figure-caption {
@@ -138,10 +159,10 @@ import ProteinViewer from '../components/ProteinViewer.astro';
     color: var(--text-muted);
     padding-left: 1rem;
     border-left: 2px solid var(--border);
+    line-height: 1.5;
   }
 
   .caption-label {
-    /* FIX: Uses theme variable */
     color: var(--text-main); 
     font-weight: 600;
   }
@@ -173,7 +194,7 @@ import ProteinViewer from '../components/ProteinViewer.astro';
 
   .entry-sidebar time {
     font-size: 0.9rem;
-    color: var(--text-main); /* Adapts to Night Mode */
+    color: var(--text-main); 
     font-weight: 500;
   }
 
@@ -189,7 +210,7 @@ import ProteinViewer from '../components/ProteinViewer.astro';
     font-size: 1.5rem;
     margin-top: 0;
     margin-bottom: 0.75rem;
-    color: var(--text-main); /* Adapts to Night Mode */
+    color: var(--text-main);
     letter-spacing: -0.01em;
   }
 
@@ -201,7 +222,7 @@ import ProteinViewer from '../components/ProteinViewer.astro';
   }
 
   .entry-body strong {
-    color: var(--text-main); /* Adapts to Night Mode */
+    color: var(--text-main);
     font-weight: 600;
   }
 

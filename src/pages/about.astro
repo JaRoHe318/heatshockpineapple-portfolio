@@ -3,13 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout 
-  title="About"
-  description="Who I am, how I work, and the kinds of problems I like to solve.">
+  title="Profile"
+  description="Background, technical toolkit, and professional philosophy.">
   
   <main>
     <header class="page-header">
-      <h1>About</h1>
-      <p class="subtitle">Biochemist · Coder</p>
+      <h1>Profile</h1>
+      <p class="subtitle">Advancing molecular discovery through the integration of biochemical rigor and computational scale.</p>
     </header>
 
     <section class="banner-container">
@@ -57,6 +57,118 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <article class="ledger-entry">
         <div class="entry-sidebar">
+          <span class="mono-meta sidebar-label">Toolkit</span>
+        </div>
+        <div class="entry-content">
+          <div class="toolkit-grid">
+            
+            <div class="toolkit-category">
+              <h3 class="toolkit-title">Biophysics & Wet Lab</h3>
+              <ul class="toolkit-list">
+                <li>FP / MST / DSF / TR-FRET</li>
+                <li>Mammalian Cell Culture</li>
+                <li>Protein Purification (His-tag)</li>
+                <li>Organic Synthesis</li>
+              </ul>
+            </div>
+
+            <div class="toolkit-category">
+              <h3 class="toolkit-title">Automation & Instru.</h3>
+              <ul class="toolkit-list">
+                <li>BioTek EL406 / Cytation</li>
+                <li>Beckman Biomek</li>
+                <li>Akta FPLC</li>
+                <li>Agilent HPLC/LC-MS</li>
+              </ul>
+            </div>
+
+            <div class="toolkit-category">
+              <h3 class="toolkit-title">Computation</h3>
+              <ul class="toolkit-list">
+                <li>Python (pandas, scipy)</li>
+                <li>R (tidyverse, ggplot2)</li>
+                <li>PyMOL / AlphaFold / Rosetta</li>
+                <li>SQL / Git / Bash</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </article>
+
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
+          <span class="mono-meta sidebar-label">Education</span>
+        </div>
+        <div class="entry-content">
+          
+          <div class="cv-item">
+            <h3 class="cv-title">Postbaccalaureate Research Training (PROPEL)</h3>
+            <p class="cv-sub">University of California, San Francisco</p>
+            <p class="cv-detail">
+              NIH-funded excellence program for researchers in biomedical science. 
+              Focused on high-throughput screening and neurodegenerative disease mechanisms.
+            </p>
+          </div>
+          
+          <div class="cv-item">
+            <h3 class="cv-title">B.S. Biochemistry</h3>
+            <p class="cv-sub">San Francisco State University | Minor in Computing Applications</p>
+          </div>
+
+          <div class="cv-item">
+            <h3 class="cv-title">Associates Degrees</h3>
+            <p class="cv-sub">Pasadena City College</p>
+            <ul class="cv-list">
+              <li>A.S. Engineering and Technology</li>
+              <li>A.S. Natural Sciences</li>
+            </ul>
+          </div>
+          
+          <div class="cv-divider"></div>
+
+          <h3 class="cv-section-header">Mentorship & Communication</h3>
+          
+          <div class="cv-item">
+            <h3 class="cv-title">PROPEL Founding Peer Mentor</h3>
+            <p class="cv-sub">University of California, San Francisco</p>
+            <p class="cv-detail">
+              Established the peer mentorship framework for the PROPEL post-baccalaureate program. 
+              Developed guidance resources to help incoming scholars navigate lab rotations and 
+              experimental design.
+            </p>
+          </div>
+
+          <div class="cv-item">
+            <h3 class="cv-title">PINC Program Peer Mentor</h3>
+            <p class="cv-sub">San Francisco State University | 2021–2022</p>
+            <p class="cv-detail">
+              Mentored 8 students in R programming and bioinformatics. Guided team workflows for 
+              gene expression and methylation analysis projects.
+            </p>
+          </div>
+
+          <div class="cv-item">
+            <h3 class="cv-title">Supplemental Instructor</h3>
+            <p class="cv-sub">San Francisco State University | 2019–2020</p>
+            <p class="cv-detail">
+              Led structured review sessions for Organic Chemistry and Biochemistry. Developed 
+              problem-solving materials for metabolic pathway analysis.
+            </p>
+          </div>
+
+          <div class="cv-item">
+            <h3 class="cv-title">Conference Presenter</h3>
+            <p class="cv-detail">
+              Presented research findings at <strong>ACS National Meeting</strong> and <strong>The Protein Society</strong>.
+            </p>
+          </div>
+
+        </div>
+      </article>
+
+      <article class="ledger-entry">
+        <div class="entry-sidebar">
           <span class="mono-meta sidebar-label">Connect</span>
         </div>
         <div class="entry-content">
@@ -70,7 +182,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <span class="link-name">Resume (PDF)</span>
               <span class="link-icon">↓</span>
             </a>
-            <a href="mailto:work@heatshockpineapple.com" class="link-card">
+            <a href="mailto:jrh@heatshockpineapple.com" class="link-card">
               <span class="link-name">Email</span>
               <span class="link-icon">→</span>
             </a>
@@ -113,13 +225,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .subtitle {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--text-muted);
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     font-weight: 400;
+    line-height: 1.4;
+    max-width: 65ch;
   }
 
-  /* === BANNER (Hero Image) === */
+  /* === BANNER === */
   .banner-container {
     margin-bottom: 5rem;
   }
@@ -134,7 +248,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .banner-image {
     width: 100%;
-    height: 350px; /* Cinematic height */
+    height: 350px;
     object-fit: cover;
     object-position: center 20%;
     display: block;
@@ -163,7 +277,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .entry-sidebar {
     text-align: right;
     padding-top: 0.5rem;
-    border-right: 2px solid var(--accent-primary); /* Brand Petrol Blue */
+    border-right: 2px solid var(--accent-primary);
     padding-right: 1.5rem;
   }
 
@@ -186,6 +300,90 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .narrative-text strong {
     color: var(--text-main);
     font-weight: 600;
+  }
+
+  /* === TOOLKIT GRID === */
+  .toolkit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .toolkit-title {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .toolkit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toolkit-list li {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
+  }
+
+  /* === CV ITEMS === */
+  .cv-item {
+    margin-bottom: 2rem;
+  }
+  
+  .cv-title {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    margin: 0 0 0.25rem 0;
+    font-weight: 600;
+  }
+
+  .cv-sub {
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-detail {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+    max-width: 55ch;
+  }
+
+  .cv-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--text-muted);
+  }
+  
+  .cv-list li {
+    margin-bottom: 0.25rem;
+  }
+
+  .cv-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 3rem 0;
+    width: 100%;
+  }
+
+  .cv-section-header {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    display: inline-block;
+    padding-bottom: 0.25rem;
   }
 
   /* === LINK GRID === */

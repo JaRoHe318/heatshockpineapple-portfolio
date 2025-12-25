@@ -6,67 +6,81 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="Heat Shock Pineapple"
   description="Computational Biochemist specializing in assay development and data analysis.">
   
-  <section class="hero-wrapper">
-    
-    <div class="text-content">
-      <div class="identity-block">
-        <h1 class="name-title">Jason Hernandez</h1>
-        <h2 class="role-title mono-meta">Computational Biochemist</h2>
-      </div>
-
-      <div class="value-prop">
-        <p class="lead-text">
-          Bridging the gap between <span class="highlight">wet lab rigour</span> and <span class="highlight">computational workflow</span>.
-        </p>
-        <p class="body-text">
-          I design reproducible protein assays, build Python tools for high-throughput screening, and visualize complex structural data.
-        </p>
-      </div>
-
-      <div class="cta-row">
-        <a href="/science" class="btn-primary">View Research</a>
-        <a href="/code" class="btn-secondary">See Code</a>
-      </div>
-    </div>
-
-    <div class="visual-content">
-      <div class="portrait-frame">
-        <img 
-          src="/images/me/portrait.jpg" 
-          alt="Jason Hernandez" 
-          class="home-portrait"
-          loading="eager" 
-        />
-        <div class="orbit-ring"></div>
-      </div>
+  <main class="home-container">
+    <section class="hero-wrapper">
       
-      <a 
-        href="https://www.linkedin.com/in/jrh318" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="status-badge mono-meta"
-      >
-        <span class="status-dot"></span> Open for collaboration
-      </a>
+      <div class="text-content">
+        <div class="identity-block">
+          <h1 class="name-title">Jason Hernandez</h1>
+          <h2 class="role-title mono-meta">Computational Biochemist</h2>
+        </div>
 
-      <div class="quote-card">
-        <p>“Nearly everything is really interesting if you go into it deeply enough.”</p>
-        <cite>— Richard Feynman</cite>
+        <div class="value-prop">
+          <p class="lead-text">
+            Advancing molecular discovery by bridging <span class="highlight">wet lab 
+            rigor</span> with <span class="highlight">computational scale</span>.
+          </p>
+          <p class="body-text">
+            I design reproducible protein assays, engineer high-throughput screening workflows, 
+            and build Python pipelines to make complex data actionable.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a href="/science" class="btn-primary">View Research</a>
+          <a href="/code" class="btn-secondary">See Code</a>
+        </div>
       </div>
-    </div>
 
-  </section>
+      <div class="visual-content">
+        <div class="portrait-frame">
+          <img 
+            src="/images/me/portrait.jpg" 
+            alt="Jason Hernandez" 
+            class="home-portrait"
+            loading="eager" 
+          />
+          <div class="orbit-ring"></div>
+        </div>
+        
+        <a 
+          href="https://www.linkedin.com/in/jrh318" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="status-badge mono-meta"
+        >
+          <span class="status-dot"></span> Open for collaboration
+        </a>
+
+        <div class="quote-card">
+          <p>“Nearly everything is really interesting if you go into it deeply enough.”</p>
+          <cite>— Richard Feynman</cite>
+        </div>
+      </div>
+
+    </section>
+  </main>
 </BaseLayout>
 
 <style>
-  /* === LAYOUT === */
+  /* === LAYOUT FIX === */
+  .home-container {
+    width: 100%;
+    /* Matches Header/Footer max-width */
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 2rem;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
   .hero-wrapper {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr; 
     gap: 4rem;
     align-items: center;
-    min-height: 70vh;
-    padding-top: 1rem;
+    width: 100%;
   }
 
   /* === TEXT COLUMN === */
@@ -77,11 +91,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .name-title {
-    font-size: 3.5rem;
+    font-size: 4rem;
     line-height: 1;
     margin-bottom: 0.75rem;
     color: var(--text-main);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    font-weight: 700;
   }
 
   .role-title {
@@ -101,12 +116,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .highlight {
-    background: linear-gradient(to bottom, transparent 65%, rgba(45, 90, 69, 0.1) 65%);
+    background: linear-gradient(to bottom, transparent 65%, rgba(45, 90, 69, 0.15) 65%);
     color: inherit;
+    padding: 0 4px;
   }
 
   .body-text {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: var(--text-muted);
     max-width: 48ch;
     line-height: 1.6;
@@ -162,8 +178,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .portrait-frame {
     position: relative;
-    width: 260px;
-    height: 260px;
+    width: 280px;
+    height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,8 +187,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .home-portrait {
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
     object-fit: cover;
     z-index: 2;
@@ -183,10 +199,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     position: absolute;
     width: 100%;
     height: 100%;
-    /* Petrol Blue Ring, Visible */
     border: 1px dashed var(--accent-primary);
-    opacity: 0.7; 
-    
+    opacity: 0.4; 
     border-radius: 50%;
     z-index: 1;
     animation: spin 60s linear infinite;
@@ -202,15 +216,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-decoration: none;
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
-    border: 1px solid transparent; 
+    border: 1px solid var(--border);
     transition: all 0.2s ease;
   }
 
   .status-badge:hover {
     background: var(--bg-surface);
-    border-color: var(--border);
+    border-color: var(--accent-primary);
     color: var(--text-main);
-    transform: translateY(-1px);
   }
 
   .status-dot {
@@ -230,7 +243,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .quote-card p {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--text-main);
     margin-bottom: 0.5rem;
   }
@@ -248,11 +261,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   /* === MOBILE === */
   @media (max-width: 900px) {
+    .home-container {
+      display: block; 
+      min-height: auto;
+      padding-top: 3rem;
+      padding-bottom: 4rem;
+    }
+
     .hero-wrapper {
       grid-template-columns: 1fr;
       text-align: left;
       gap: 3rem;
-      padding-top: 0;
     }
 
     .text-content {
@@ -267,12 +286,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       width: 100%;
     }
 
-    .name-title { font-size: 2.5rem; }
+    .name-title { font-size: 2.8rem; }
     
-    .portrait-frame { width: 200px; height: 200px; }
-    .home-portrait { width: 170px; height: 170px; }
+    .portrait-frame { width: 220px; height: 220px; }
+    .home-portrait { width: 180px; height: 180px; }
     
-    .cta-row { width: 100%; }
-    .btn-primary, .btn-secondary { flex: 1; }
+    .cta-row { width: 100%; flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; }
   }
 </style>

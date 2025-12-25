@@ -21,6 +21,7 @@ const {
   title,
   description,
   image = '/social-preview.png', 
+  // CLEANER: Uses your astro.config.mjs 'site' property
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
   type = 'website',
   publishedDate,
@@ -29,6 +30,8 @@ const {
 
 const siteName = 'Heat Shock Pineapple';
 const fullTitle = title.includes(siteName) ? title : `${title} · ${siteName}`;
+
+// CLEANER: Uses your astro.config.mjs 'site' property
 const socialImageURL = new URL(image, Astro.site).href;
 ---
 
@@ -43,6 +46,8 @@ const socialImageURL = new URL(image, Astro.site).href;
   <meta name="title" content={fullTitle} />
   <meta name="description" content={description} />
   <meta name="author" content="Jason Hernandez" />
+  
+  <meta name="theme-color" content="#2d5a45" />
   
   <link rel="canonical" href={canonicalURL} />
   
@@ -86,8 +91,7 @@ const socialImageURL = new URL(image, Astro.site).href;
 
     // Run on initial load
     setMode();
-
-    // CRITICAL FIX: Run again after Astro swaps the page content
+    // Run again after Astro swaps the page content (View Transitions)
     document.addEventListener('astro:after-swap', setMode);
   </script>
 </head>
@@ -97,9 +101,7 @@ const socialImageURL = new URL(image, Astro.site).href;
   
   <Header />
   
-  <main id="main">
-    <slot />
-  </main>
+  <slot />
   
   <Footer />
 </body>

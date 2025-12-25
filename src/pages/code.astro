@@ -24,8 +24,10 @@ import BindingCurve from '../components/BindingCurve.astro';
         <BindingCurve />
       </div>
       <figcaption class="figure-caption mono-meta">
-        <strong class="caption-label">Figure 2</strong> — Real-time non-linear regression. 
-        Raw data (black) fitted to a 4-parameter logistic model (metallic gold).
+        <strong class="caption-label">Figure 2. Saturation Binding Analysis.</strong> 
+        Raw experimental data (black) fitted to a 4-parameter logistic (4PL) model (metallic gold). 
+        The resulting <em>K</em><sub>d</sub> of 5.01 nM demonstrates high-affinity interaction, validated by 
+        low residual variance.
       </figcaption>
     </section>
 
@@ -42,9 +44,9 @@ import BindingCurve from '../components/BindingCurve.astro';
             <a href="#" class="external-link" aria-label="View Repo">↗</a>
           </div>
           <p class="entry-body">
-            The logic behind the chart above. A reusable pipeline to import tabular data, 
-            flag outliers using Z-score thresholds, fit dose–response curves, and validate 
-            Hill slope assumptions.
+            Backend logic for the interactive regression model above. A reusable pipeline for 
+            tabular data ingestion, outlier detection via Z-score thresholds, and 4PL 
+            curve fitting with Hill slope validation.
           </p>
           <div class="tag-cloud">
             <span class="tag">scipy</span>
@@ -57,22 +59,22 @@ import BindingCurve from '../components/BindingCurve.astro';
       <article class="ledger-entry">
         <div class="entry-sidebar">
           <span class="tech-primary mono-meta">R Stats</span>
-          <span class="status-tag">Markdown</span>
+          <span class="status-tag">Automation</span>
         </div>
         <div class="entry-content">
           <div class="title-row">
-            <h2 class="entry-title">Screening QC & Diagnostics</h2>
+            <h2 class="entry-title">Automated Reporting Pipeline</h2>
             <a href="#" class="external-link" aria-label="View Repo">↗</a>
           </div>
           <p class="entry-body">
-            Automated quality control for 384-well HTS screens. Computes plate statistics 
-            (Z-prime, SSMD), visualizes edge effects, and generates interactive heatmaps 
-            for batch processing validation.
+            Developed a reporting engine using R/RDKit that generates structure-annotated 
+            slide decks directly from raw plate reader data. Standardized the visualization 
+            of dose-response curves and QC metrics for team review.
           </p>
           <div class="tag-cloud">
-            <span class="tag">ggplot2</span>
-            <span class="tag">tidyr</span>
-            <span class="tag">htsr</span>
+            <span class="tag">RDKit</span>
+            <span class="tag">Report Generation</span>
+            <span class="tag">Workflow Opt</span>
           </div>
         </div>
       </article>
@@ -88,9 +90,9 @@ import BindingCurve from '../components/BindingCurve.astro';
             <a href="#" class="external-link" aria-label="View Repo">↗</a>
           </div>
           <p class="entry-body">
-            Command-line workflows for rendering publication-quality protein figures. 
-            Automates the mapping of SAR activity data onto 3D surfaces to visualize 
-            binding pockets.
+            Programmatic generation of publication-quality structural figures. Automates the 
+            mapping of Structure-Activity Relationship (SAR) data directly onto 3D surfaces 
+            to elucidate binding pocket dynamics.
           </p>
           <div class="tag-cloud">
             <span class="tag">ChimeraX</span>
@@ -124,7 +126,7 @@ import BindingCurve from '../components/BindingCurve.astro';
   h1 {
     font-size: 3rem;
     font-weight: 700;
-    color: var(--text-main); /* Night Mode Safe */
+    color: var(--text-main); 
     margin: 0;
     letter-spacing: -0.05rem;
   }
@@ -173,6 +175,7 @@ import BindingCurve from '../components/BindingCurve.astro';
     color: var(--text-muted);
     padding-left: 1rem;
     border-left: 2px solid var(--border);
+    line-height: 1.5;
   }
 
   .caption-label {
@@ -194,14 +197,13 @@ import BindingCurve from '../components/BindingCurve.astro';
     align-items: flex-start;
   }
 
-  /* SIDEBAR: NOW UNIFIED WITH PETROL BLUE */
+  /* SIDEBAR: Unified Petrol Blue */
   .entry-sidebar {
     text-align: right;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding-top: 0.35rem;
-    /* FIX: Use Primary Brand Color (Petrol) instead of Gold */
     border-right: 2px solid var(--accent-primary);
     padding-right: 1.5rem;
   }
@@ -215,7 +217,6 @@ import BindingCurve from '../components/BindingCurve.astro';
   .status-tag {
     font-size: 0.75rem;
     font-family: var(--font-mono);
-    /* FIX: High contrast Petrol Blue */
     color: var(--accent-primary);
     opacity: 0.9;
   }
@@ -245,7 +246,7 @@ import BindingCurve from '../components/BindingCurve.astro';
   }
   
   .external-link:hover {
-    color: var(--accent-primary); /* Hover becomes Petrol */
+    color: var(--accent-primary);
   }
 
   .entry-body {
@@ -265,7 +266,6 @@ import BindingCurve from '../components/BindingCurve.astro';
   .tag {
     font-size: 0.75rem;
     font-family: var(--font-mono);
-    /* FIX: Petrol Blue Tags (Consistent with Science Page) */
     color: var(--accent-primary);
     background: color-mix(in srgb, var(--accent-primary), transparent 92%);
     padding: 0.25rem 0.6rem;
@@ -293,7 +293,6 @@ import BindingCurve from '../components/BindingCurve.astro';
       gap: 0.75rem; 
       padding-top: 0; 
       border-right: none; 
-      /* Unified Mobile Border */
       border-left: 2px solid var(--accent-primary); 
       padding-left: 0.75rem; 
       padding-right: 0;
