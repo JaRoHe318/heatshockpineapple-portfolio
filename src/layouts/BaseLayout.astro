@@ -19,8 +19,8 @@ interface Props {
 
 const {
   title,
-  description,
-  image = '/og-image.png', 
+  description = "A professional portfolio by Jason Hernandez: bridging wet lab rigor with computational scale to advance high-throughput screening and structural biology.",
+  image = '/og-image.png',
   // CLEANER: Uses your astro.config.mjs 'site' property
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
   type = 'website',
