@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@heatshockpineapple/design-tokens": "github:JaRoHe318/pineapple-design-tokens",
+    "@resvg/resvg-js": "^2.6.2",
     "astro": "^5.16.6",
     "exif-parser": "^0.1.12",
     "ngl": "^2.4.0",
-    "plotly.js-dist-min": "^3.3.0"
+    "plotly.js-dist-min": "^3.3.0",
+    "satori": "^0.18.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",

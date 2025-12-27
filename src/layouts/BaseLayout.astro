@@ -20,7 +20,7 @@ interface Props {
 const {
   title,
   description,
-  image = '/social-preview.png', 
+  image = '/og-image.png', 
   // CLEANER: Uses your astro.config.mjs 'site' property
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
   type = 'website',
