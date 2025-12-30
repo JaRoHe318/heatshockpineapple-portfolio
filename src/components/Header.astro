@@ -189,7 +189,7 @@ const isActive = (path: string) => {
     font-family: var(--font-sans);
     font-weight: 900;
     font-size: 0.85rem; 
-    color: #ffffff;
+    color: var(--text-inverse, #ffffff);
     display: block;
     -webkit-font-smoothing: antialiased;
   }
@@ -213,10 +213,17 @@ const isActive = (path: string) => {
 
   /* ICONS */
   .icon-btn { 
-    background: none; border: none; cursor: pointer; padding: 5px; display: flex; align-items: center; transition: color 0.2s;
+    background: none;
+    border: none; 
+    cursor: pointer; 
+    padding: 5px; 
+    display: flex; 
+    align-items: center; 
+    transition: color 0.2s;
     color: rgba(255,255,255,0.7);
   }
-  .icon-btn:hover { color: var(--text-inverse, #ffffff); }
+  .icon-btn:hover { 
+    color: var(--text-inverse, #ffffff); }
   .icon-row { display: flex; align-items: center; gap: 10px; }
 
   /* NAV LINKS */

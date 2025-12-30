@@ -65,6 +65,7 @@ const tape = `${dnaK}   ${dnaK}   ${dnaK}`;
     margin-top: 6rem;
     padding-bottom: 3rem; 
     overflow: hidden;
+    flex-shrink: 0; 
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -191,16 +192,22 @@ const tape = `${dnaK}   ${dnaK}   ${dnaK}`;
     width: 100%;
     background: rgba(0, 0, 0, 0.20); /* Darker track */
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 0.25rem 0; 
+    padding: 0.4rem 0; 
     margin-bottom: 2rem;
     user-select: none;
+
+    display: flex;
+    align-items: center;
   }
 
   .scrolling-text {
     white-space: nowrap;
     font-family: var(--font-mono);
-    font-size: 0.70rem;
-    letter-spacing: 0.2rem;
+    font-size: 0.75rem;
+
+    line-height:1;
+
+    letter-spacing: 0.25rem;
     color: var(--brand-secondary, #ffd700);
     opacity: 0.85;
     display: inline-block;
